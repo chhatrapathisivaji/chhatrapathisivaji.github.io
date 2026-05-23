@@ -1,10 +1,10 @@
 const portfolio = {
   goals: [
     {
-      title: "Applied AI Engineering",
+      title: "Applied AI And LLM Evaluation",
       summary:
-        "Position the profile for machine learning engineering roles where models must move beyond notebooks into reliable systems.",
-      signals: ["Deep learning", "Model evaluation", "Production thinking"],
+        "Position the profile for roles that need reliable model evaluation, execution-based validation, and robust agentic-system testing.",
+      signals: ["LLM evaluation", "Agentic systems", "Automated validation"],
     },
     {
       title: "Multimodal Research To Product",
@@ -13,51 +13,54 @@ const portfolio = {
       signals: ["Audio AI", "Computer vision", "NLP"],
     },
     {
-      title: "Full-Stack AI Builder",
+      title: "Data Systems To AI Product",
       summary:
-        "Connect backend, database, and interface experience with AI workflows so projects feel deployable, maintainable, and useful.",
-      signals: ["Java/Spring", "Python web", "SQL"],
+        "Connect distributed data engineering, risk analytics, NLP, dashboards, and AI workflows into measurable business outcomes.",
+      signals: ["PySpark", "SQL", "Risk analytics"],
     },
   ],
   experience: [
     {
-      role: "Applied AI / ML Engineering",
-      organization: "Handshake",
+      role: "AI Research Fellow",
+      organization: "Handshake AI",
       place: "New York, NY",
-      dates: "Current",
+      dates: "Oct 2025 - Present",
       details: [
-        "Focused on applied AI and real-world machine learning development in a professional product environment.",
-        "Combines AI research orientation with software execution, project ownership, and cross-functional delivery.",
+        "Engineer execution-based validation pipelines for LLM-generated code, improving test pass rates from 60% to 85%+ and reducing invalid downstream code.",
+        "Run root-cause diagnostics on model-generated code to resolve computational bottlenecks and architectural flaws, reducing average execution latency from about 1.8s to under 1.1s per run.",
+        "Develop adversarial and edge-case test suites for agentic systems, doubling unique failure-mode coverage and improving robustness on unseen scenarios by about 20%.",
+      ],
+    },
+    {
+      role: "Data Analyst",
+      organization: "Tiger Analytics",
+      place: "Chennai, India",
+      dates: "Jun 2022 - May 2023",
+      details: [
+        "Architected an end-to-end risk analytics pipeline using Scikit-learn hierarchical clustering to segment 1M+ customer profiles and mitigate an estimated $4.5M in credit default and compliance risk.",
+        "Engineered automated time-series forecasting frameworks with advanced RNN architectures, achieving over 90% prediction accuracy across a $10M+ at-risk portfolio.",
+        "Deployed an AI-powered chatbot with Azure Bot Framework and Hugging Face Tiny-RoBERTa to support 10,000+ daily queries, then improved real-time engagement by 60% through an active-learning QnA pipeline.",
+      ],
+    },
+    {
+      role: "Data Science Intern",
+      organization: "Tiger Analytics",
+      place: "Chennai, India",
+      dates: "Oct 2021 - Jun 2022",
+      details: [
+        "Engineered scalable ETL pipelines using PySpark and advanced SQL, processing 500GB+ of industrial data and accelerating downstream ML deployments by 30%.",
+        "Used Python, pandas, and SciPy for hypothesis-driven A/B testing, influencing product optimizations that yielded a 15% uplift in user retention.",
+        "Designed Tableau dashboards and statistical models that surfaced $500K+ in strategic opportunities and reduced processing anomalies by 40%.",
       ],
     },
     {
       role: "Graduate AI/ML Research And Engineering",
       organization: "New York University",
       place: "New York, NY",
-      dates: "2023 - 2025",
+      dates: "Sep 2023 - May 2025",
       details: [
-        "Completed advanced coursework across machine learning, deep learning, computer vision, big data, information visualization, machine listening, algorithms, and software engineering.",
-        "Built applied ML systems across audio generation, EEG analysis, underwater vision, salary prediction, food classification, and multimodal wildlife-trade detection.",
-      ],
-    },
-    {
-      role: "Computer Vision And Multimodal ML Project Contributor",
-      organization: "NYU Project Work",
-      place: "New York, NY",
-      dates: "2023 - 2025",
-      details: [
-        "Led or contributed to report-backed projects using YOLOv8, YOLOv11, EfficientNet, DistilBERT, cross-attention, Spark MLlib, Random Forests, XGBoost, and TensorFlow/Keras.",
-        "Owned feature extraction, network architecture, model training, NLP feature engineering, regression model comparison, and production-resource analysis across different projects.",
-      ],
-    },
-    {
-      role: "AI, Data, And Full-Stack Development",
-      organization: "Earlier Professional And Project Work",
-      place: "Chennai / Hyderabad / Remote",
-      dates: "Prior experience",
-      details: [
-        "Built experience across classification, regression, clustering, forecasting, deep learning, NLP, computer vision, and web application use cases.",
-        "Worked with Java, Spring, Hibernate, JDBC, Python, Flask, Django, React, SQL, HTML, and CSS for software and data-driven applications.",
+        "Completed graduate study in computer science with applied work across machine learning, deep learning, computer vision, big data, information visualization, machine listening, algorithms, and software engineering.",
+        "Built report-backed ML systems across generative audio, EEG analysis, underwater vision, salary prediction, food classification, and multimodal wildlife-trade detection.",
       ],
     },
   ],
@@ -408,42 +411,42 @@ const portfolio = {
   ],
   skills: [
     {
-      group: "Machine Learning",
-      items: ["Deep learning", "Classification", "Regression", "Clustering", "Time-series forecasting", "Model evaluation"],
+      group: "AI And Machine Learning",
+      items: ["Generative AI architectures", "LLM evaluation pipelines", "Multimodal deep learning", "NLP", "Automated validation", "Adversarial testing"],
+    },
+    {
+      group: "Modeling And Analytics",
+      items: ["Time-series forecasting", "RNNs", "Hierarchical clustering", "Regression", "A/B testing", "Statistical modeling"],
     },
     {
       group: "Frameworks",
-      items: ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "Spark MLlib", "Kymatio"],
+      items: ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "Spark MLlib", "Hugging Face"],
     },
     {
-      group: "Multimodal AI",
-      items: ["Computer vision", "NLP", "Audio generation", "EEG signal processing", "Cross-attention", "Text-audio alignment"],
+      group: "Data Engineering And ETL",
+      items: ["PySpark", "SQL", "Hive", "SparkSQL", "Hadoop", "Distributed pipeline orchestration"],
     },
     {
-      group: "Data And MLOps",
-      items: ["SQL", "Databricks", "MLflow", "GridSearchCV", "Data lineage", "Distributed pipelines"],
-    },
-    {
-      group: "Full-Stack Engineering",
-      items: ["Java", "Spring MVC", "Hibernate", "JDBC", "Python", "Flask", "Django", "React"],
+      group: "Tools And Platforms",
+      items: ["Python", "Pandas", "SciPy", "NumPy", "Git", "Docker", "Azure Bot Framework", "Tableau"],
     },
     {
       group: "Model Families",
-      items: ["YOLOv8", "YOLOv11", "EfficientNet", "DistilBERT", "XGBoost", "Random Forest", "ResNet"],
+      items: ["YOLOv8", "YOLOv11", "EfficientNet", "DistilBERT", "Tiny-RoBERTa", "XGBoost", "Random Forest"],
     },
   ],
   education: [
     {
       school: "New York University",
-      dates: "2023 - 2025",
+      dates: "Sep 2023 - May 2025",
       details:
-        "Graduate study focused on data science, machine learning, deep learning, big data, computer vision, machine listening, software engineering, algorithms, and information visualization.",
+        "Master of Science in Computer Science, New York, NY. Graduate study focused on AI/ML, data science, systems, and applied research projects.",
     },
     {
       school: "KL University",
-      dates: "2018 - 2022",
+      dates: "Jun 2018 - Apr 2022",
       details:
-        "Computer Science and Engineering background with public university records listing an 8.87 CGPA and First Class standing.",
+        "Bachelor of Science in Computer Science and Engineering with Artificial Intelligence, Vijayawada, India.",
     },
   ],
   certifications: [

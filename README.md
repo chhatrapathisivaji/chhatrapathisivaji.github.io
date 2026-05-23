@@ -70,8 +70,10 @@ Folder: / (root)
 ## Public Information Used
 
 - LinkedIn public profile data from the provided URL
+- Resume.pdf provided from the local Downloads folder
 - Public search snippets for education and project details
 - Public Freelancer profile snippet for earlier AI/data/full-stack background
+- Project reports provided from the local Downloads folder
 
 ## Information Needed For The Next Version
 
