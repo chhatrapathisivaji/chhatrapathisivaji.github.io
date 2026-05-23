@@ -23,10 +23,22 @@ http://127.0.0.1:4173/
 - Hero positioning for AI/ML and full-stack roles
 - Personal goal alignment
 - Experience timeline
-- Featured projects
+- Project library with clickable case-study routes
 - Skills grouped by hiring signal
 - Education and certifications
 - Contact / opportunity section
+
+## Project Routes
+
+Project cards use hash-based routes, for example:
+
+```text
+https://chhatrapathisivaji.github.io/#project/sound-scene-synthesis
+```
+
+The current project descriptions were distilled from the provided reports. The raw PDFs were not copied
+into the public site, so the site publishes the written case studies without exposing the original course
+report files.
 
 ## GitHub Pages Setup
 
