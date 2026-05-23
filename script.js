@@ -435,6 +435,28 @@ const portfolio = {
       items: ["YOLOv8", "YOLOv11", "EfficientNet", "DistilBERT", "Tiny-RoBERTa", "XGBoost", "Random Forest"],
     },
   ],
+  skillStories: [
+    {
+      title: "LLM Evaluation",
+      proof: "60% -> 85%+",
+      summary: "Execution-based validation, root-cause diagnostics, adversarial tests, and agentic failure-mode coverage.",
+    },
+    {
+      title: "Production Data",
+      proof: "500GB+",
+      summary: "PySpark, SQL, Hive, SparkSQL, Hadoop, ETL orchestration, and downstream ML acceleration.",
+    },
+    {
+      title: "Multimodal AI",
+      proof: "8 projects",
+      summary: "Audio, EEG, underwater vision, ad images, job text, food images, and cross-attention systems.",
+    },
+    {
+      title: "Business Impact",
+      proof: "$4.5M",
+      summary: "Risk segmentation, forecasting, retention experiments, support automation, and stakeholder dashboards.",
+    },
+  ],
   education: [
     {
       school: "New York University",
@@ -461,6 +483,29 @@ const portfolio = {
 };
 
 const byId = (id) => document.getElementById(id);
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+const projectFilterLabels = [
+  { id: "all", label: "All" },
+  { id: "ai", label: "AI" },
+  { id: "data", label: "Data" },
+  { id: "vision", label: "Vision" },
+  { id: "systems", label: "Systems" },
+];
+
+const projectCategoryBySlug = {
+  "sound-scene-synthesis": "ai",
+  "fathomnet-visual-categorization": "vision",
+  "harmful-brain-activity-classification": "ai",
+  "resnet-cifar10-under-5m": "vision",
+  "food11-ml-deployment": "systems",
+  "nyc-salary-range-prediction": "data",
+  "wildlife-trafficking-ads": "data",
+  "library-management-system": "systems",
+};
 
 function renderGoals() {
   byId("goalGrid").innerHTML = portfolio.goals
@@ -547,7 +592,7 @@ function renderProjects() {
   byId("projectGrid").innerHTML = portfolio.projects
     .map(
       (project) => `
-        <a class="project-card" href="#project/${project.slug}" aria-label="View detailed case study for ${project.title}">
+        <a class="project-card" data-category="${projectCategoryBySlug[project.slug]}" href="#project/${project.slug}" aria-label="View detailed case study for ${project.title}">
           ${renderProjectVisual(project.visual)}
           <div class="project-body">
             <div class="project-meta">
@@ -566,6 +611,54 @@ function renderProjects() {
             <span class="project-link">View case study</span>
           </div>
         </a>
+      `
+    )
+    .join("");
+}
+
+function renderProjectFilters() {
+  byId("projectFilter").innerHTML = projectFilterLabels
+    .map(
+      (filter, index) => `
+        <button class="${index === 0 ? "active" : ""}" type="button" data-filter="${filter.id}">
+          ${filter.label}
+        </button>
+      `
+    )
+    .join("");
+}
+
+function bindProjectFilters() {
+  byId("projectFilter").addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+
+    if (!button) {
+      return;
+    }
+
+    const filter = button.dataset.filter;
+    byId("projectFilter")
+      .querySelectorAll("button")
+      .forEach((item) => item.classList.toggle("active", item === button));
+
+    byId("projectGrid")
+      .querySelectorAll(".project-card")
+      .forEach((card) => {
+        const visible = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("is-filtered-out", !visible);
+      });
+  });
+}
+
+function renderSkillStories() {
+  byId("skillStoryGrid").innerHTML = portfolio.skillStories
+    .map(
+      (story) => `
+        <article class="skill-story-card">
+          <strong>${story.proof}</strong>
+          <h3>${story.title}</h3>
+          <p>${story.summary}</p>
+        </article>
       `
     )
     .join("");
@@ -674,8 +767,31 @@ function renderProjectDetail(slug) {
     </div>
   `;
 
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
+  const resetScroll = () => {
+    const html = document.documentElement;
+    const body = document.body;
+    const htmlScrollBehavior = html.style.scrollBehavior;
+    const bodyScrollBehavior = body.style.scrollBehavior;
+
+    html.style.scrollBehavior = "auto";
+    body.style.scrollBehavior = "auto";
+    html.scrollTop = 0;
+    body.scrollTop = 0;
+
+    if (typeof window.scrollTo === "function") {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+
+    html.style.scrollBehavior = htmlScrollBehavior;
+    body.style.scrollBehavior = bodyScrollBehavior;
+  };
+
+  resetScroll();
+  requestAnimationFrame(() => {
+    resetScroll();
+    requestAnimationFrame(resetScroll);
+  });
+  [80, 180, 360].forEach((delay) => setTimeout(resetScroll, delay));
 }
 
 function renderDetailBlock(title, body) {
@@ -712,7 +828,10 @@ function handleRoute() {
 
 renderGoals();
 renderExperience();
+renderProjectFilters();
 renderProjects();
+bindProjectFilters();
+renderSkillStories();
 renderSkills();
 renderEducation();
 renderCertifications();
