@@ -42,7 +42,6 @@ styles.css    # Styles and responsive layout
 ## Contact
 
 - LinkedIn: https://www.linkedin.com/in/chhatrapathi-sivaji-lakkimsetty/
-- Email: chhatrapathisivaji@gmail.com
 - GitHub: https://github.com/chhatrapathisivaji
 
 © 2026 Chhatrapathi Sivaji Lakkimsetty
