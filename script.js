@@ -488,7 +488,7 @@ const portfolio = {
     },
     {
       title: "Multimodal AI",
-      proof: "8 projects",
+      proof: "9 projects",
       summary: "Audio, EEG, underwater vision, ad images, job text, food images, and cross-attention systems.",
     },
     {
