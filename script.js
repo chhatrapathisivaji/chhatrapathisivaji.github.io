@@ -65,6 +65,46 @@ const portfolio = {
     },
   ],
   projects: [
+        {
+      slug: "intelliquest",
+      title: "IntelliQuest — Academic Paper Search Engine",
+      dates: "2023",
+      type: "Full-stack web application",
+      course: "Software Engineering Course Project",
+      visual: "search",
+      summary: "A specialized search engine for academic papers with personalized recommendations, advanced filtering, and AI-powered relevance ranking for students, researchers, and faculty.",
+      impact: "Demonstrates full-stack collaborative engineering: React + Django + PostgreSQL + Docker, with GPT-powered search and a live Digital Ocean deployment as part of a 5-person team.",
+      metrics: [
+        { label: "Team size", value: "5" },
+        { label: "Role", value: "Collaborator" },
+        { label: "Deployment", value: "Digital Ocean" },
+      ],
+      stack: ["React.js", "Django", "PostgreSQL", "Docker", "AWS", "OpenAI GPT", "REST API", "JavaScript", "Python"],
+      details: {
+        problem: "Researchers and students struggle to find, filter, and track academic papers across fragmented databases — no single platform offers personalized recommendations alongside advanced search.",
+        dataset: "Academic papers corpus with keyword, author, journal, citation, and date metadata.",
+        approach: [
+          "Built a React.js frontend with dynamic filtering by keyword, author, publication date, and citation metrics.",
+          "Developed a Django REST backend with PostgreSQL for user profiles, reading lists, and paper metadata.",
+          "Integrated OpenAI GPT for personalized recommendation based on user search history.",
+          "Containerized full stack with Docker and deployed live on Digital Ocean.",
+          "Implemented Google Auth for user authentication and secure sessions.",
+        ],
+        results: [
+          "Live deployment at http://165.227.74.112:3000/ serving full search and recommendation features.",
+          "Supports advanced filtering by relevance, date, citation count, and journal impact.",
+          "Users can save favorites, create reading lists, and follow authors.",
+        ],
+        role: "Collaborated as a team member on a 5-person software engineering team; contributed to frontend components, backend integration, and quiz/search feature development across multiple pull requests.",
+        takeaways: [
+          "End-to-end full-stack development with React, Django, and PostgreSQL in a team setting.",
+          "Hands-on experience with Docker containerization and cloud deployment on Digital Ocean.",
+          "Practical integration of GPT-based personalization into a production search system.",
+        ],
+        sources: ["https://github.com/ShaktidharK1997/IntelliQuest"],
+      },
+      links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/IntelliQuest" }],
+    },
     {
       slug: "sound-scene-synthesis",
       title: "Sound Scene Synthesis",
