@@ -1,86 +1,48 @@
-# Chhatrapathi Sivaji Lakkimsetty Portfolio Draft
+# Chhatrapathi Sivaji Lakkimsetty | AI/ML Portfolio
 
-This is a self-contained static portfolio draft for:
+Live at: https://chhatrapathisivaji.github.io/
 
-```text
-https://chhatrapathisivaji.github.io/
-```
+## About
 
-Open `index.html` directly in a browser, or preview it locally with:
+Personal portfolio of Chhatrapathi Sivaji Lakkimsetty, AI Research Fellow and Data Scientist based in New York. Focused on LLM evaluation, multimodal deep learning, and production-grade AI systems.
+
+## Tech Stack
+
+- Pure HTML / CSS / JavaScript (no framework)
+- Single-page application with hash-based routing
+- Fully static — hosted on GitHub Pages
+
+## Run Locally
 
 ```bash
 python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-Then visit:
+Then open `http://127.0.0.1:4173/`
 
-```text
-http://127.0.0.1:4173/
+## Structure
+
+```
+index.html    # Main HTML shell
+script.js     # All portfolio data + rendering logic
+styles.css    # Styles and responsive layout
 ```
 
-## Current Structure
+## Featured Projects
 
-- Hero positioning for AI/ML and full-stack roles
-- Personal goal alignment
-- Experience timeline
-- Project library with clickable case-study routes
-- Skills grouped by hiring signal
-- Education and certifications
-- Contact / opportunity section
+- IntelliQuest — Academic Paper Search Engine (React, Django, PostgreSQL, Docker)
+- Sound Scene Synthesis — Generative audio with AudioLDM / TangoFlux
+- FathomNet — Underwater object detection with YOLOv8/v11
+- Harmful Brain Activity Classification — EEG/spectrogram seizure detection
+- Wildlife Trafficking Detection — Multimodal AI with Spark, vision & language models
+- NYC Job Salary Prediction — NLP + regression
+- Parameter-Efficient ResNet for CIFAR-10
+- Food-11 Classification & Deployment
 
-## Project Routes
+## Contact
 
-Project cards use hash-based routes, for example:
+- LinkedIn: https://www.linkedin.com/in/chhatrapathi-sivaji-lakkimsetty/
+- Email: chhatrapathisivaji@gmail.com
+- GitHub: https://github.com/chhatrapathisivaji
 
-```text
-https://chhatrapathisivaji.github.io/#project/sound-scene-synthesis
-```
-
-The current project descriptions were distilled from the provided reports. The raw PDFs were not copied
-into the public site, so the site publishes the written case studies without exposing the original course
-report files.
-
-## GitHub Pages Setup
-
-Create a GitHub repository named exactly:
-
-```text
-chhatrapathisivaji.github.io
-```
-
-Then publish these files to the repository root on the `main` branch:
-
-```bash
-git init
-git add index.html styles.css script.js README.md .nojekyll
-git commit -m "Initial portfolio"
-git branch -M main
-git remote add origin https://github.com/chhatrapathisivaji/chhatrapathisivaji.github.io.git
-git push -u origin main
-```
-
-In GitHub, use `Settings -> Pages`, then select:
-
-```text
-Source: Deploy from a branch
-Branch: main
-Folder: / (root)
-```
-
-## Public Information Used
-
-- LinkedIn public profile data from the provided URL
-- Resume.pdf provided from the local Downloads folder
-- Public search snippets for education and project details
-- Public Freelancer profile snippet for earlier AI/data/full-stack background
-- Project reports provided from the local Downloads folder
-
-## Information Needed For The Next Version
-
-- Resume PDF or DOCX
-- Verified GitHub URL
-- Exact Handshake title and dates
-- Earlier company names, titles, and dates for Chennai/Hyderabad roles
-- Email address or preferred contact method
-- Project repository links, demos, screenshots, papers, or notebooks
-- Target roles and personal goal priorities
+© 2026 Chhatrapathi Sivaji Lakkimsetty
