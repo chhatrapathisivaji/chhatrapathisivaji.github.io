@@ -26,9 +26,9 @@ const portfolio = {
       place: "New York, NY",
       dates: "Oct 2025 - Present",
       details: [
-        "Engineer execution-based validation pipelines for LLM-generated code, improving test pass rates from 60% to 85%+ and reducing invalid downstream code.",
-        "Run root-cause diagnostics on model-generated code to resolve computational bottlenecks and architectural flaws, reducing average execution latency from about 1.8s to under 1.1s per run.",
-        "Develop adversarial and edge-case test suites for agentic systems, doubling unique failure-mode coverage and improving robustness on unseen scenarios by about 20%.",
+        "Engineer execution-based validation pipelines for LLM-generated code, improving test pass rates from 60% to 87%+ and reducing invalid downstream code.",
+        "Engineered latency-optimized inference paths (batching, caching, streamlined routing) that reduced end-to-end pipeline latency from 1.8s to 1.1s while maintaining model quality.",       "Partnered with product managers and software engineers to translate qualitative user feedback into measurable evaluation criteria and guardrails for LLM-driven features.",
+        "Partnered with product managers and software engineers to translate qualitative user feedback into measurable evaluation criteria and guardrails for LLM-driven features.",         "Develop adversarial and edge-case test suites for agentic systems, doubling unique failure-mode coverage and improving robustness on unseen scenarios by about 20%.",
       ],
     },
     {
@@ -54,7 +54,7 @@ const portfolio = {
       ],
     },
     {
-      role: "Graduate AI/ML Research And Engineering",
+      role: "Software Engineer",       organization: "EPAM Systems",       place: "Hyderabad, India",       dates: "Jun 2022 - Aug 2023",       details: [         "Designed and deployed production-grade REST APIs and microservices using Java and Spring Boot, supporting internal data workflows and cross-team integrations.",         "Collaborated with cross-functional teams to gather requirements, scope technical solutions, and deliver features across iterative release cycles.",         "Improved code quality and reliability by implementing unit and integration tests, reducing post-release incidents and accelerating CI/CD pipeline throughput.",       ],     },     {       role: "Graduate AI/ML Research And Engineering",
       organization: "New York University",
       place: "New York, NY",
       dates: "Sep 2023 - May 2025",
@@ -487,7 +487,7 @@ const portfolio = {
   skillStories: [
     {
       title: "LLM Evaluation",
-      proof: "60% -> 85%+",
+      proof: "60% -> 87%+",
       summary: "Execution-based validation, root-cause diagnostics, adversarial tests, and agentic failure-mode coverage.",
     },
     {
