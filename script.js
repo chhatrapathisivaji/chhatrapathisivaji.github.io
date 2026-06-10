@@ -366,48 +366,57 @@ const portfolio = {
       },
     },
     {
-      slug: "wildlife-trafficking-ads",
-      title: "Wildlife Trafficking Detection From Animal-Related Ads",
-      dates: "2024",
-      type: "Big data and multimodal AI",
-      course: "Big Data Project",
-      visual: "wildlife",
-      summary:
-        "A multimodal big-data system for identifying wildlife-trade signals in online animal-related advertisements using structured features, images, and text.",
-      impact:
-        "Combines AI for social good with Spark feature engineering, image models, language models, cross-attention, and deployment-minded evaluation.",
-      metrics: [
-        { label: "Test accuracy", value: "94.08%" },
-        { label: "Test recall", value: "93.02%" },
-        { label: "Test precision", value: "85.11%" },
-      ],
-      stack: ["Spark MLlib", "EfficientNet", "DistilBERT", "CrossAttention", "Quantile Discretizer", "Frequent patterns"],
-      details: {
-        problem:
-          "Illegal wildlife trade threatens biodiversity, ecosystems, and public health. The project focuses on identifying online advertisements for animal trading by combining product images, text descriptions, prices, countries, sellers, and categories.",
-        dataset:
-          "The project works with animal-related online advertisement data collected from trading sites. Cleaning removed incomplete ads and normalized fields such as price, country, seller, domain, and product category.",
-        approach: [
-          "Used Spark MLlib for feature engineering over location, price, category, seller, and domain attributes.",
-          "Applied frequent pattern matching and quantile discretization to create price bins and discover high-confidence itemsets.",
-          "Transformed images with EfficientNet after removing the final classification layer so image feature maps could feed the multimodal model.",
-          "Transformed advertisement text with DistilBERT and combined image/text signals with cross-attention plus normalized price and country features.",
-        ],
-        results: [
-          "The model achieved 99.58% training accuracy, 99.53% training recall, and 99.07% training precision.",
-          "On the test set, it achieved 94.08% accuracy, 93.02% recall, and 85.11% precision.",
-          "The high recall suggests the model was effective at identifying positive wildlife-trade signals, though precision could improve with more data and tuning.",
-        ],
-        role:
-          "Contributed to multimodal model framing, big-data feature engineering, and evaluation analysis for the wildlife-trade detection pipeline.",
-        takeaways: [
-          "Combining structured metadata, text, and image features improves signal quality for suspicious-ad classification.",
-          "High recall is valuable for screening workflows where missing a risky ad is costly.",
-          "Additional labeled data and hyperparameter tuning should improve precision while preserving recall.",
-        ],
-        sources: ["Big_Data_Final_Report.pdf"],
-      },
-    },
+  slug: "wildlife-trafficking-ads",
+  title: "Wildlife Trafficking Detection",
+  dates: "2024",
+  type: "Multimodal AI / Big Data",
+  course: "Big Data Project",
+  visual: "wildlife",
+  summary:
+    "A multimodal machine learning system for identifying potential wildlife-trafficking signals in online animal-related advertisements using text, images, price, seller, and location metadata.",
+  impact:
+    "Highlights AI-for-social-good work across Spark feature engineering, multimodal modeling, and practical classification tradeoffs with strong recall on a difficult real-world screening task.",
+  metrics: [
+    { label: "Test accuracy", value: "94.08%" },
+    { label: "Test recall", value: "93.02%" },
+    { label: "Test precision", value: "85.11%" },
+  ],
+  stack: [
+    "Spark MLlib",
+    "EfficientNet",
+    "DistilBERT",
+    "CrossAttention",
+    "PyTorch",
+    "Feature Engineering",
+    "Quantile Discretizer",
+    "Frequent Pattern Mining",
+  ],
+  details: {
+    problem:
+      "Illegal wildlife trade is difficult to detect at scale because online ads are short-lived, noisy, and spread across marketplaces. This project focused on identifying suspicious animal-related advertisements by combining listing images, text, price, seller information, and geographic signals.",
+    dataset:
+      "The project used animal-related online advertisement data collected from trading platforms, with cleaning and normalization applied to fields such as price, country, seller, domain, and category before modeling.",
+    approach: [
+      "Engineered structured features from price, seller, country, domain, and product-category attributes using Spark MLlib.",
+      "Applied price normalization and discretization to reduce outlier effects caused by mixed currencies and inconsistent listing formats.",
+      "Extracted visual features with EfficientNet and textual features with DistilBERT.",
+      "Combined image and text representations through cross-attention, then fused them with normalized price and encoded country information for final classification.",
+    ],
+    results: [
+      "Achieved 94.08% test accuracy, 93.02% test recall, and 85.11% test precision on the final evaluation set.",
+      "High recall made the model especially useful for screening workflows where missing risky listings is more costly than reviewing some false positives.",
+      "The project showed that combining structured metadata with image and text features improved classification strength over relying on a single modality.",
+    ],
+    role:
+      "Contributed to multimodal model framing, feature-engineering workflow design, and evaluation analysis for the wildlife-ad detection pipeline.",
+    takeaways: [
+      "Multimodal systems can capture stronger signals than text-only or image-only approaches in noisy real-world listing data.",
+      "Structured metadata such as price and location can materially improve downstream classification quality.",
+      "Further gains would likely come from more labeled data, stronger calibration, and precision-focused tuning.",
+    ],
+    sources: ["Big_Data_Final_Report.pdf"],
+  },
+},
     {
       slug: "library-management-system",
       title: "Full-Stack Library Management System",
