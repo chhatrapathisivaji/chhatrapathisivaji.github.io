@@ -518,7 +518,7 @@ const portfolio = {
     "Certified System Administrator - ServiceNow",
     "Introduction to Artificial Intelligence - Simplilearn",
     "Problem Solving (Basic) - HackerRank",
-    "IBM Data Science Specialization - Coursera",
+    "IBM Data Science Specialization - Coursera",   ],   footer: {     copy: "© 2026 Chhatrapathi Sivaji Lakkimsetty. All rights reserved.",   },
   ],
 };
 
