@@ -790,17 +790,20 @@ const portfolio = {
   type: "Multimodal AI",
   course: "Big Data Project",
   visual: "wildlife",
+  articleTitle: "Wildlife Trafficking Detection in Online Marketplaces",
+  articleSubtitle:
+    "A multimodal Spark-PyTorch pipeline for screening suspicious wildlife-trade ads from images, text, and structured metadata.",
   summary:
-    "A multimodal system that flags suspicious wildlife-trade ads using listing text, images, price, and location signals.",
+    "A graduate big-data project that flags high-risk wildlife-trade listings using EfficientNet image features, DistilBERT text embeddings, and price/location signals.",
   built:
     "Spark-based feature engineering pipeline plus multimodal model with EfficientNet for images, DistilBERT for text, and cross-attention over structured features.",
   impact:
     "Reached 94.08% accuracy, 93.02% recall, and 85.11% precision, prioritizing high recall on a real-world classification problem.",
   context: "Built as a graduate project at NYU focusing on multimodal systems and responsible AI.",
   story: [
-    "Wildlife Trafficking Detection is a multimodal screening system for suspicious wildlife-trade ads, where text, images, prices, and location can each carry partial signals.",
-    "I contributed to a Spark-based feature engineering pipeline and a multimodal model that combines EfficientNet image features, DistilBERT text features, and structured metadata through cross-modal fusion.",
-    "The system achieved 94.08% accuracy, 93.02% recall, and 85.11% precision, intentionally prioritizing recall so fewer suspicious listings would be missed in a high-stakes screening workflow.",
+    "Wildlife Trafficking Detection is a multimodal screening system for online animal-product listings, where suspicious signals may be spread across images, seller text, prices, countries, and categories.",
+    "The project combines Spark-based feature engineering with a PyTorch model that fuses EfficientNet image features, DistilBERT text embeddings, and structured metadata through cross-attention and dense fusion layers.",
+    "On held-out testing data, the system reached 94.08% accuracy, 93.02% recall, and 85.11% precision, intentionally prioritizing recall so fewer suspicious listings would be missed.",
   ],
   metrics: [
     { label: "Accuracy", value: "94.08%" },
@@ -831,7 +834,7 @@ const portfolio = {
       "Showed that combining metadata with image and text signals improved classification strength.",
     ],
     role:
-      "Contributed to feature engineering, multimodal pipeline design, and evaluation analysis for the project.",
+      "Co-designed the Spark-based feature engineering pipeline and implemented/evaluated multimodal classification components across image, text, and structured listing features.",
     takeaways: [
       "Multimodal systems can outperform single-modality approaches on noisy listing data.",
       "Structured metadata like price and location adds meaningful predictive value.",
@@ -839,6 +842,173 @@ const portfolio = {
     ],
     sources: ["Big_Data_Final_Report.pdf"],
   },
+  articleSections: [
+    {
+      title: "Motivation And Problem Framing",
+      image: {
+        src: "assets/projects/wildlife-trafficking/workflow.png",
+        alt: "Workflow diagram for wildlife trafficking detection",
+        caption: "The project follows a full big-data workflow: collection, understanding, cleaning, exploration, feature engineering, modeling, tuning, optimization, and evaluation.",
+      },
+      paragraphs: [
+        "The illegal wildlife trade threatens biodiversity, ecosystems, and public health. Online marketplaces make enforcement harder because listings appear at scale, change quickly, and often disappear before investigators can review them.",
+        "Animal-related ads can look benign at first glance. A title may be vague, an image may carry the strongest clue, or a price/location combination may reveal risk only when structured metadata is considered alongside text and visuals.",
+        "This project frames the problem as a supervised screening task: given an ad's image, description, seller information, country, category, and price, predict whether the listing is suspicious or non-suspicious so human experts can prioritize the highest-risk content.",
+      ],
+    },
+    {
+      title: "Dataset And Labeling",
+      image: {
+        src: "assets/projects/wildlife-trafficking/features-overview.png",
+        alt: "Table of dataset attributes for animal-related online ads",
+        caption: "The dataset includes listing URLs, titles, page text, product descriptions, domains, images, prices, sellers, locations, countries, zero-shot labels, and image IDs.",
+      },
+      paragraphs: [
+        "The dataset is built from animal-related online advertisements collected from e-commerce sources such as eBay. Each listing combines visual, textual, and structured fields that need to be cleaned and aligned before modeling.",
+        "The raw dataset includes noisy descriptions, duplicated or overlapping location fields, inconsistent formatting across countries and currencies, and image URLs that need to be connected back to listing IDs.",
+        "Labels are represented as suspicious versus non-suspicious classes. The report also includes zero-shot label and probability fields, which provide additional weak signals during analysis.",
+      ],
+      items: [
+        { label: "Text", text: "Title, page text, and product description." },
+        { label: "Image", text: "Listing image URLs and image paths tied to product IDs." },
+        { label: "Seller", text: "Seller names/domains and other marketplace identity signals." },
+        { label: "Location", text: "Location, country, and coordinate-style fields when available." },
+        { label: "Price", text: "Raw price and currency fields that require normalization." },
+      ],
+    },
+    {
+      title: "Spark Feature Engineering",
+      image: {
+        src: "assets/projects/wildlife-trafficking/price-normalization.png",
+        alt: "Price violin plots before and after conversion",
+        caption: "Price normalization and discretization reduce the effect of inconsistent currencies, extreme values, and marketplace-specific formatting.",
+      },
+      paragraphs: [
+        "Because the data mixes structured and unstructured fields, the project first builds a Spark-based feature engineering pipeline to transform raw listings into model-ready representations.",
+        "The report uses Spark MLlib to derive and segment features from product location, price, category, and seller details. Frequent pattern matching helps identify useful itemsets, while quantile discretization bins price into ten ranges.",
+        "This structured feature work matters because risk signals are often relational: a product category may not be suspicious alone, but its price range, seller identity, and country of origin can shift the model's interpretation.",
+      ],
+      items: [
+        { label: "Deduplication", text: "Remove duplicate or near-duplicate records and overlapping fields." },
+        { label: "Normalization", text: "Standardize inconsistent country, seller, category, and price formats." },
+        { label: "Discretization", text: "Use quantile bins to make price features more robust to outliers." },
+        { label: "Pattern mining", text: "Use itemsets to study support/confidence relationships among price, seller, country, and category." },
+      ],
+    },
+    {
+      title: "Multimodal Model Design",
+      image: {
+        src: "assets/projects/wildlife-trafficking/multimodal-model.png",
+        alt: "Multimodal model diagram using DistilBERT, EfficientNet, cross-attention, price, and country",
+        caption: "The classifier combines text, image, price, and country information before making the final suspicious/non-suspicious prediction.",
+      },
+      paragraphs: [
+        "The core classifier fuses three information streams: image features, text features, and structured metadata. This is important because suspicious listings rarely expose all evidence in a single modality.",
+        "EfficientNet transforms listing images into visual embeddings that can capture species appearance, product presentation, cages, packaging, or market context. DistilBERT converts noisy ad descriptions into contextual text embeddings.",
+        "The model then combines these learned representations with structured signals such as price and country. Cross-attention and dense fusion layers allow the model to reason jointly over visual, textual, and metadata cues.",
+      ],
+      items: [
+        { label: "Image encoder", text: "EfficientNet feature extraction over resized and normalized listing images." },
+        { label: "Text encoder", text: "DistilBERT embeddings over seller descriptions and ad text." },
+        { label: "Metadata", text: "Normalized price and encoded country/category/seller features." },
+        { label: "Fusion", text: "Cross-attention and dense layers combine modalities before classification." },
+      ],
+    },
+    {
+      title: "Training And Evaluation Setup",
+      paragraphs: [
+        "The model was trained for 20 epochs using an 80/20 train-test split. The evaluation emphasizes recall and precision, not just accuracy, because missing suspicious listings is more costly than sending a manageable number of false positives to human review.",
+        "For this type of screening workflow, a model with high recall can help investigators find more risky listings, while precision controls how much noise appears in the review queue.",
+      ],
+      items: [
+        { label: "Task", text: "Binary suspicious versus non-suspicious classification." },
+        { label: "Split", text: "80/20 train-test split." },
+        { label: "Training", text: "20 epochs." },
+        { label: "Metrics", text: "Accuracy, recall, precision, and confusion matrices." },
+        { label: "Operating goal", text: "Prioritize high recall while keeping precision above 85%." },
+      ],
+    },
+    {
+      title: "Results",
+      image: {
+        src: "assets/projects/wildlife-trafficking/testing-confusion-matrix.png",
+        alt: "Testing confusion matrix for wildlife trafficking detection",
+        caption: "The held-out test matrix shows 119 true negatives, 40 true positives, 7 false positives, and 3 false negatives.",
+      },
+      paragraphs: [
+        "On held-out testing data, the multimodal model achieved 94.08% accuracy, 93.02% recall, and 85.11% precision.",
+        "The high recall is the key result: the model caught 40 of 43 positive cases in the test split, leaving only 3 false negatives. Precision remains above 85%, which keeps the alert stream practical for downstream screening.",
+      ],
+      table: {
+        columns: ["Dataset", "Precision", "Recall", "Accuracy"],
+        rows: [
+          ["Training", "99.07%", "99.53%", "99.58%"],
+          ["Testing", "85.11%", "93.02%", "94.08%"],
+        ],
+      },
+    },
+    {
+      title: "Train-Test Generalization",
+      image: {
+        src: "assets/projects/wildlife-trafficking/training-confusion-matrix.png",
+        alt: "Training confusion matrix for wildlife trafficking detection",
+        caption: "Training performance is near-perfect, while testing performance remains strong with the expected precision/recall drop on unseen data.",
+      },
+      paragraphs: [
+        "The training confusion matrix shows near-perfect behavior, while the testing matrix shows a realistic performance drop. That gap is expected when the model moves from seen examples to unseen listings.",
+        "The important point is that recall remains high on testing data. In a screening context, this means the model is still useful for triage even when precision has room to improve.",
+      ],
+      items: [
+        { label: "Training behavior", text: "500 true negatives, 214 true positives, 2 false positives, and 1 false negative." },
+        { label: "Testing behavior", text: "119 true negatives, 40 true positives, 7 false positives, and 3 false negatives." },
+        { label: "Interpretation", text: "The model generalizes strongly enough for screening, but additional data and tuning could improve precision." },
+      ],
+    },
+    {
+      title: "Ablations And Observations",
+      paragraphs: [
+        "The project shows why multimodal modeling is valuable for online marketplace risk detection. Text alone can miss subtle visual evidence, image alone can miss seller intent, and metadata alone can be ambiguous without context.",
+        "Structured features such as price, seller, country, and category improve the model because they give the classifier operational signals that image and text encoders cannot infer reliably on their own.",
+      ],
+      items: [
+        { label: "Multimodal advantage", text: "Combining text, image, and metadata captures more evidence than any single modality." },
+        { label: "Price normalization", text: "Currency conversion, log-like behavior, and discretization reduce instability from extreme marketplace prices." },
+        { label: "Seller/country/category", text: "Frequent pattern features expose risk patterns across marketplace actors and product groups." },
+        { label: "Thresholding", text: "Decision thresholds can be tuned for higher recall when the goal is to avoid missed suspicious listings." },
+      ],
+    },
+    {
+      title: "My Role",
+      paragraphs: [
+        "I co-designed the Spark-based feature engineering pipeline and implemented the multimodal classification model, combining EfficientNet image features, DistilBERT text embeddings, and structured metadata through PyTorch-based fusion layers.",
+        "I also led evaluation design around recall-sensitive metrics and confusion-matrix analysis, focusing on how well the model could support screening workflows where missed suspicious listings carry high cost.",
+      ],
+    },
+    {
+      title: "Limitations",
+      paragraphs: [
+        "Despite strong metrics, this project should be understood as a decision-support prototype rather than an automated enforcement system.",
+      ],
+      items: [
+        { label: "Label noise", text: "Weak or heuristic labels can miss some trafficking patterns or over-represent known species and regions." },
+        { label: "Domain drift", text: "Sellers can change language, platforms, product presentation, and tactics over time." },
+        { label: "False positives", text: "Even with 85.11% precision, some non-suspicious ads will be flagged and need human review." },
+        { label: "Ethical use", text: "The model should support expert triage and auditing, not make legal or enforcement decisions automatically." },
+      ],
+    },
+    {
+      title: "Future Directions",
+      paragraphs: [
+        "The next version should improve precision while preserving recall, add stronger calibration, and close the loop between investigator feedback and model updates.",
+      ],
+      items: [
+        { label: "Active learning", text: "Feed investigator feedback on flagged ads back into the training set." },
+        { label: "Calibration", text: "Use uncertainty estimation or conformal prediction to rank the most confident high-risk cases." },
+        { label: "Network features", text: "Analyze seller networks, routes, and repeated marketplace patterns in addition to listing-level signals." },
+        { label: "Multi-label outputs", text: "Predict species category, product type, and risk level for richer investigative workflows." },
+      ],
+    },
+  ],
 },
     {
       slug: "library-management-system",
