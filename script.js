@@ -1,22 +1,22 @@
 const portfolio = {
   goals: [
     {
-      title: "Applied AI And LLM Evaluation",
+      title: "LLM evaluation & agentic-system testing",
       summary:
-        "Position the profile for roles that need reliable model evaluation, execution-based validation, and robust agentic-system testing.",
-      signals: ["LLM evaluation", "Agentic systems", "Automated validation"],
+        "Execution-based validation, adversarial suites, and guardrails for LLM-driven and agentic features.",
+      signals: ["Execution-based validation", "Adversarial suites", "Guardrails"],
     },
     {
-      title: "Multimodal Research To Product",
+      title: "Multimodal research turned into usable product",
       summary:
-        "Show depth in audio, EEG, image, text, and cross-attention systems while keeping the explanation accessible to technical reviewers.",
-      signals: ["Audio AI", "Computer vision", "NLP"],
+        "Applied work across audio, vision, text, structured data, and cross-attention systems.",
+      signals: ["Audio", "Vision", "Text", "Structured data"],
     },
     {
-      title: "Data Systems To AI Product",
+      title: "Data systems wired to business outcomes",
       summary:
-        "Connect distributed data engineering, risk analytics, NLP, dashboards, and AI workflows into measurable business outcomes.",
-      signals: ["PySpark", "SQL", "Risk analytics"],
+        "Risk analytics, retention, support automation, and experimentation built from reliable data workflows.",
+      signals: ["Risk analytics", "Retention", "Support automation", "Experimentation"],
     },
   ],
   experience: [
@@ -26,11 +26,12 @@ const portfolio = {
       place: "New York, NY",
       dates: "Oct 2025 - Present",
       details: [
-        "Engineer execution-based validation pipelines for LLM-generated code, improving test pass rates from 60% to 87%+ and reducing invalid downstream code.",
-        "Engineered latency-optimized inference paths with batching, caching, and streamlined routing, reducing end-to-end pipeline latency from 1.8s to 1.1s while maintaining model quality.",
-        "Partnered with product managers and software engineers to translate qualitative user feedback into measurable evaluation criteria and guardrails for LLM-driven features.",
-        "Develop adversarial and edge-case test suites for agentic systems, doubling unique failure-mode coverage and improving robustness on unseen scenarios by about 20%.",
+        "Built execution-based validation pipelines for LLM-generated code, raising test pass rates from 60% to 87%+ and cutting invalid downstream code.",
+        "Engineered latency-optimized inference paths (batching, caching, streamlined routing), reducing end-to-end pipeline latency from 1.8s to 1.1s while maintaining model quality.",
+        "Translated qualitative user feedback into measurable evaluation criteria and guardrails for LLM-driven features in partnership with PMs and engineers.",
+        "Developed adversarial and edge-case test suites for agentic systems, doubling unique failure-mode coverage and improving robustness on unseen scenarios by ~20%.",
       ],
+      tech: "Python, PyTorch, internal evaluation frameworks, cloud services.",
     },
     {
       role: "Data Analyst",
@@ -38,10 +39,11 @@ const portfolio = {
       place: "Chennai, India",
       dates: "Jun 2022 - May 2023",
       details: [
-        "Architected an end-to-end risk analytics pipeline using Scikit-learn hierarchical clustering to segment 1M+ customer profiles and mitigate an estimated $4.5M in credit default and compliance risk.",
-        "Engineered automated time-series forecasting frameworks with advanced RNN architectures, achieving over 90% prediction accuracy across a $10M+ at-risk portfolio.",
-        "Deployed an AI-powered chatbot with Azure Bot Framework and Hugging Face Tiny-RoBERTa to support 10,000+ daily queries, then improved real-time engagement by 60% through an active-learning QnA pipeline.",
+        "Architected an end-to-end risk analytics pipeline using hierarchical clustering to segment 1M+ customer profiles, mitigating an estimated $4.5M in credit-default and compliance risk.",
+        "Engineered automated time-series forecasting frameworks with RNN architectures, achieving 90%+ prediction accuracy across a $10M+ at-risk portfolio.",
+        "Deployed an AI-powered chatbot using Azure Bot Framework and Tiny-RoBERTa to support 10,000+ daily queries, then improved real-time engagement by 60% via an active-learning QnA pipeline.",
       ],
+      tech: "Python, scikit-learn, RNNs, Azure Bot Framework, Tiny-RoBERTa, SQL, dashboards.",
     },
     {
       role: "Data Science Intern",
@@ -49,21 +51,11 @@ const portfolio = {
       place: "Chennai, India",
       dates: "Oct 2021 - Jun 2022",
       details: [
-        "Engineered scalable ETL pipelines using PySpark and advanced SQL, processing 500GB+ of industrial data and accelerating downstream ML deployments by 30%.",
-        "Used Python, pandas, and SciPy for hypothesis-driven A/B testing, influencing product optimizations that yielded a 15% uplift in user retention.",
-        "Designed Tableau dashboards and statistical models that surfaced $500K+ in strategic opportunities and reduced processing anomalies by 40%.",
+        "Built scalable ETL pipelines using PySpark and advanced SQL to process 500GB+ of industrial data, accelerating downstream ML deployments by 30%.",
+        "Ran hypothesis-driven A/B tests with Python, pandas, and SciPy, informing product changes that delivered a 15% uplift in user retention.",
+        "Designed Tableau dashboards and anomaly-detection models that surfaced $500K+ in strategic opportunities and reduced processing anomalies by 40%.",
       ],
-    },
-    {
-      role: "Software Engineer",
-      organization: "EPAM Systems",
-      place: "Hyderabad, India",
-      dates: "Jun 2022 - Aug 2023",
-      details: [
-        "Designed and deployed production-grade REST APIs and microservices using Java and Spring Boot, supporting internal data workflows and cross-team integrations.",
-        "Collaborated with cross-functional teams to gather requirements, scope technical solutions, and deliver features across iterative release cycles.",
-        "Improved code quality and reliability by implementing unit and integration tests, reducing post-release incidents and accelerating CI/CD pipeline throughput.",
-      ],
+      tech: "PySpark, SQL, Python, SciPy, Tableau, SparkSQL, Hadoop.",
     },
     {
       role: "Graduate AI/ML Research And Engineering",
@@ -74,10 +66,23 @@ const portfolio = {
         "Completed graduate study in computer science with applied work across machine learning, deep learning, computer vision, big data, information visualization, machine listening, algorithms, and software engineering.",
         "Built report-backed ML systems across generative audio, EEG analysis, underwater vision, salary prediction, food classification, and multimodal wildlife-trade detection.",
       ],
+      tech: "PyTorch, TensorFlow, Spark, Python, Docker, modern CV and NLP models.",
+    },
+    {
+      role: "Software Engineer",
+      organization: "EPAM Systems",
+      place: "Hyderabad, India",
+      dates: "Jun 2022 - Aug 2023",
+      details: [
+        "Designed and deployed production-grade REST APIs and microservices using Java and Spring Boot to support internal data workflows and cross-team integrations.",
+        "Improved reliability with unit and integration tests, reducing post-release incidents and speeding up CI/CD pipeline throughput.",
+        "Collaborated with cross-functional teams to gather requirements, scope technical solutions, and deliver features across iterative release cycles.",
+      ],
+      tech: "Java, Spring Boot, REST APIs, CI/CD, relational databases.",
     },
   ],
   projects: [
-        {
+    {
       slug: "intelliquest",
       title: "IntelliQuest — Academic Paper Search Engine",
       dates: "2023",
@@ -85,13 +90,14 @@ const portfolio = {
       course: "Software Engineering Course Project",
       visual: "search",
       summary: "A specialized search engine for academic papers with personalized recommendations, advanced filtering, and AI-powered relevance ranking for students, researchers, and faculty.",
-      impact: "Demonstrates full-stack collaborative engineering: React + Django + PostgreSQL + Docker, with GPT-powered search and a live Digital Ocean deployment as part of a 5-person team.",
+      built: "Full-stack system with React, Django, PostgreSQL, and GPT-powered semantic search, including indexing, filters, and recommendation logic in a 5-person team.",
+      impact: "Delivered a live deployment used by students and faculty, improving the relevance and speed of academic literature discovery.",
       metrics: [
         { label: "Team size", value: "5" },
         { label: "Role", value: "Collaborator" },
         { label: "Deployment", value: "Digital Ocean" },
       ],
-      stack: ["React.js", "Django", "PostgreSQL", "Docker", "AWS", "OpenAI GPT", "REST API", "JavaScript", "Python"],
+      stack: ["React", "Django", "PostgreSQL", "Docker", "AWS", "OpenAI GPT"],
       details: {
         problem: "Researchers and students struggle to find, filter, and track academic papers across fragmented databases — no single platform offers personalized recommendations alongside advanced search.",
         dataset: "Academic papers corpus with keyword, author, journal, citation, and date metadata.",
@@ -125,15 +131,17 @@ const portfolio = {
       course: "ECE-GY 9173 Machine Listening",
       visual: "audio",
       summary:
-        "A DCASE 2024 Task 7 text-to-audio synthesis system exploring AudioLDM, Tango2, TangoFlux, and wavelet scattering representations.",
+        "A DCASE 2024 Task 7 text-to-audio synthesis system exploring AudioLDM, Tango2, TangoFlux, and wavelet-scattering representations.",
+      built:
+        "Diffusion-based text-to-audio pipelines with CLAP-aligned conditioning, wavelet features via Kymatio, and a VAE-based reconstruction module.",
       impact:
-        "Shows deep generative-audio work across diffusion pipelines, CLAP alignment, wavelet features, VAE reconstruction, and Frechet Audio Distance evaluation.",
+        "Improved Frechet Audio Distance from a 62.68 baseline to 51.08 on the dev set, demonstrating better text-to-audio alignment and generative quality.",
       metrics: [
         { label: "Best dev FAD", value: "51.08" },
         { label: "Baseline dev FAD", value: "62.68" },
         { label: "VAE training", value: "150 epochs" },
       ],
-      stack: ["AudioLDM", "TangoFlux", "Tango2", "CLAP", "Kymatio", "VAE", "PANNs"],
+      stack: ["AudioLDM", "TangoFlux", "Tango2", "CLAP", "Kymatio", "VAE", "PyTorch"],
       details: {
         problem:
           "The project tackles DCASE 2024 Task 7: generate four-second, 32 kHz mono environmental audio from text prompts that describe foreground and background sound scenes. The challenge is difficult because the development data provides only 60 text prompts and high-level audio embeddings rather than original waveform recordings.",
@@ -168,15 +176,17 @@ const portfolio = {
       course: "CS-GY 6643 Computer Vision",
       visual: "vision",
       summary:
-        "Underwater object detection and out-of-distribution recognition on FathomNet2023 using YOLOv8, YOLOv11, wavelet preprocessing, and depth-shift analysis.",
+        "Underwater object detection and out-of-distribution recognition on FathomNet2023 using YOLOv8, YOLOv11, wavelet preprocessing, and depth-aware analysis.",
+      built:
+        "Detection and OOD pipelines with underwater-specific preprocessing, YOLO fine-tuning, and feature-extraction workflows for downstream classifiers.",
       impact:
-        "Demonstrates modern object detection, underwater image preprocessing, OOD detection, feature extraction ownership, and model-training leadership.",
+        "Achieved 97.12% OOD accuracy and 91% SAUC on 5,950 underwater images, demonstrating robust detection and recognition under challenging visual conditions.",
       metrics: [
-        { label: "Dataset", value: "5,950 images" },
+        { label: "Images", value: "5,950" },
         { label: "OOD accuracy", value: "97.12%" },
-        { label: "sAUC", value: "91%" },
+        { label: "SAUC", value: "91%" },
       ],
-      stack: ["YOLOv8", "YOLOv11", "ResNet50", "Random Forest", "Wavelets", "PCA", "K-Means"],
+      stack: ["YOLOv8", "YOLOv11", "ResNet50", "Random Forest", "Wavelets", "PCA", "PyTorch"],
       details: {
         problem:
           "Underwater visual recognition is vulnerable to domain shift caused by depth, lighting, camera conditions, incomplete annotations, class imbalance, and unknown organisms. The project studied whether object detection models could generalize from shallower training images to deeper validation environments.",
@@ -212,14 +222,16 @@ const portfolio = {
       visual: "eeg",
       summary:
         "EEG and spectrogram classification system for detecting seizures and harmful brain activity in neurocritical-care recordings.",
+      built:
+        "Multi-model pipeline using EEGNet, GRU, ResNet, and spectrogram-based EfficientNet inputs over 50-second EEG and 10-minute spectrogram windows.",
       impact:
-        "Shows healthcare AI work with time-series signals, spectrogram engineering, multi-model benchmarking, and careful generalization analysis.",
+        "Demonstrated robust seizure and harmful activity detection across 6 classes, with careful generalization analysis across patients and recording conditions.",
       metrics: [
         { label: "EEG window", value: "50 sec" },
         { label: "Spectrogram window", value: "10 min" },
         { label: "Classes", value: "6" },
       ],
-      stack: ["TensorFlow", "PyTorch", "EfficientNetB0", "EEGNet", "GRU", "ResNet", "Kaggle HMS"],
+      stack: ["TensorFlow", "PyTorch", "EfficientNetB0", "EEGNet", "GRU", "ResNet"],
       links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/DLFinalProject" }],
       details: {
         problem:
@@ -255,13 +267,15 @@ const portfolio = {
       course: "Deep Learning Mini Project",
       visual: "resnet",
       summary:
-        "A modified ResNet architecture designed to achieve high CIFAR-10 accuracy while staying under a 5M trainable-parameter budget.",
+        "A modified ResNet architecture designed to stay under 5M trainable parameters while achieving strong CIFAR-10 performance.",
+      built:
+        "Compact residual network with Squeeze-and-Excitation blocks, regularization, and architectural tweaks to meet strict parameter constraints.",
       impact:
-        "Highlights architecture design, residual learning, Squeeze-and-Excitation, regularization, and model-size constraints.",
+        "Reached 93.67% test accuracy with 4.70M parameters, improving over a 0.2790 test-loss baseline under the same budget.",
       metrics: [
         { label: "Accuracy", value: "93.67%" },
         { label: "Test loss", value: "0.2790" },
-        { label: "Parameters", value: "4.70M" },
+        { label: "Params", value: "4.70M" },
       ],
       stack: ["PyTorch", "ResNet", "CIFAR-10", "SE blocks", "BatchNorm", "Dropout"],
       links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/DLProject" }],
@@ -299,9 +313,11 @@ const portfolio = {
       course: "Machine Learning Project",
       visual: "food",
       summary:
-        "A Food-11 image classifier deployment study comparing VGG16, MobileNet, and Xception under accuracy, memory, CPU, and response-time tradeoffs.",
+        "Image classification study comparing VGG16, MobileNet, and Xception under accuracy, memory, CPU, and response-time constraints.",
+      built:
+        "End-to-end deployment pipeline with Kubernetes YAML, model selection, and resource-constrained benchmarking for real-world inference scenarios.",
       impact:
-        "Connects model improvement with production-resource thinking: accuracy, response time, memory, CPU limits, and deployment YAML configuration.",
+        "Improved accuracy from 0.7621 to 0.8892 while keeping best-response time at 0.72 seconds within memory and CPU limits.",
       metrics: [
         { label: "Best accuracy", value: "0.8892" },
         { label: "Baseline accuracy", value: "0.7621" },
@@ -343,12 +359,14 @@ const portfolio = {
       visual: "salary",
       summary:
         "Regression and NLP project predicting salary ranges for New York City job listings using feature engineering, ANOVA, Random Forest, and XGBoost.",
+      built:
+        "End-to-end pipeline from messy civic data ingestion and text processing to statistical tests, model selection, and tuned ensemble regressors.",
       impact:
-        "Shows end-to-end data science: messy civic data, text processing, feature engineering, statistical testing, model comparison, and tuning.",
+        "Achieved an R² of 0.8478 on 6,634 rows with 30 engineered features, capturing key drivers of salary bands.",
       metrics: [
         { label: "Rows", value: "6,634" },
         { label: "Features", value: "30" },
-        { label: "Best R2", value: "0.8478" },
+        { label: "Best R²", value: "0.8478" },
       ],
       stack: ["Python", "NLP", "scikit-learn", "Random Forest", "XGBoost", "GridSearchCV", "ANOVA"],
       details: {
@@ -386,8 +404,10 @@ const portfolio = {
   visual: "wildlife",
   summary:
     "A multimodal system that flags suspicious wildlife-trade ads using listing text, images, price, and location signals.",
+  built:
+    "Spark-based feature engineering pipeline plus multimodal model with EfficientNet for images, DistilBERT for text, and cross-attention over structured features.",
   impact:
-    "Shows multimodal modeling, Spark-based feature engineering, and strong recall on a real-world classification task.",
+    "Reached 94.08% accuracy, 93.02% recall, and 85.11% precision, prioritizing high recall on a real-world classification problem.",
   metrics: [
     { label: "Accuracy", value: "94.08%" },
     { label: "Recall", value: "93.02%" },
@@ -399,7 +419,6 @@ const portfolio = {
     "DistilBERT",
     "PyTorch",
     "Cross-Attention",
-    "Feature Engineering",
   ],
   details: {
     problem:
@@ -436,8 +455,10 @@ const portfolio = {
       visual: "library",
       summary:
         "Role-based web application for managing library catalog, issuing, returns, reservations, inventory, and administrative oversight.",
+      built:
+        "Full-stack system with Java, Spring MVC, and MySQL including RBAC, transactional operations, and reporting views.",
       impact:
-        "Balances the AI project set with concrete full-stack engineering, relational data modeling, authentication, and workflow implementation.",
+        "Demonstrated concrete software engineering skills in authentication, relational data modeling, and workflow implementation beyond ML projects.",
       metrics: [
         { label: "Stack", value: "Java" },
         { label: "Database", value: "MySQL" },
@@ -475,7 +496,7 @@ const portfolio = {
     },
     {
       group: "Modeling And Analytics",
-      items: ["Time-series forecasting", "RNNs", "Hierarchical clustering", "Regression", "A/B testing", "Statistical modeling"],
+      items: ["Time-series forecasting", "RNNs", "Hierarchical clustering", "A/B testing", "Statistical modeling"],
     },
     {
       group: "Frameworks",
@@ -497,7 +518,7 @@ const portfolio = {
   skillStories: [
     {
       title: "LLM Evaluation",
-      proof: "60% -> 87%+",
+      proof: "60% → 87%+",
       summary: "Execution-based validation, root-cause diagnostics, adversarial tests, and agentic failure-mode coverage.",
     },
     {
@@ -512,7 +533,7 @@ const portfolio = {
     },
     {
       title: "Business Impact",
-      proof: "$4.5M",
+      proof: "$4.5M+",
       summary: "Risk segmentation, forecasting, retention experiments, support automation, and stakeholder dashboards.",
     },
   ],
@@ -522,6 +543,8 @@ const portfolio = {
       dates: "Sep 2023 - May 2025",
       details:
         "Master of Science in Computer Science, New York, NY. Graduate study focused on AI/ML, data science, systems, and applied research projects.",
+      coursework:
+        "Selected coursework: Machine Learning, Deep Learning, Big Data, Computer Vision, Information Visualization, Machine Listening, Algorithms, Software Engineering.",
     },
     {
       school: "KL University",
@@ -566,7 +589,7 @@ const projectCategoryBySlug = {
   "resnet-cifar10-under-5m": "vision",
   "food11-ml-deployment": "systems",
   "nyc-salary-range-prediction": "data",
-  "wildlife-trafficking-ads": "data",
+  "wildlife-trafficking-ads": "ai",
   "library-management-system": "systems",
 };
 
@@ -599,6 +622,7 @@ function renderExperience() {
             <ul>
               ${item.details.map((detail) => `<li>${detail}</li>`).join("")}
             </ul>
+            ${item.tech ? `<p class="timeline-tech"><strong>Tech:</strong> ${item.tech}</p>` : ""}
           </div>
         </article>
       `
@@ -669,10 +693,14 @@ function renderProjects() {
           </div>
           <h3>${project.title}</h3>
           <p class="project-summary">${project.summary}</p>
-          <p class="project-impact">${project.impact}</p>
+          <ul class="project-card-points">
+            <li><strong>What I built:</strong> ${project.built}</li>
+            <li><strong>Impact:</strong> ${project.impact}</li>
+          </ul>
           <div class="project-metrics">
             ${project.metrics.map((metric) => `<span class="project-metric"><strong>${metric.value}</strong><span>${metric.label}</span></span>`).join("")}
           </div>
+          <p class="project-tech-line"><strong>Tech:</strong> ${project.stack.slice(0, 6).join(", ")}</p>
           <div class="project-stack">
             ${project.stack.slice(0, 6).map((item) => `<span class="project-tech">${item}</span>`).join("")}
           </div>
@@ -754,6 +782,7 @@ function renderEducation() {
           <span class="education-date">${item.dates}</span>
           <h3>${item.school}</h3>
           <p>${item.details}</p>
+          ${item.coursework ? `<p class="coursework">${item.coursework}</p>` : ""}
         </article>
       `
     )
@@ -784,6 +813,8 @@ function renderProjectDetail(slug) {
       <p class="project-meta"><span>${project.type}</span><span>${project.dates}</span><span>${project.course}</span></p>
       <h1>${project.title}</h1>
       <p>${project.summary}</p>
+      <p><strong>What I built:</strong> ${project.built}</p>
+      <p><strong>Impact:</strong> ${project.impact}</p>
       <div class="project-metrics">
         ${project.metrics.map((metric) => `<span class="project-metric"><strong>${metric.value}</strong><span>${metric.label}</span></span>`).join("")}
       </div>

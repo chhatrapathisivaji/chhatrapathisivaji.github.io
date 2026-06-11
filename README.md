@@ -4,7 +4,7 @@ Live at: https://chhatrapathisivaji.github.io/
 
 ## About
 
-Personal portfolio of Chhatrapathi Sivaji Lakkimsetty, AI Research Fellow and Data Scientist based in New York. Focused on LLM evaluation, multimodal deep learning, and production-grade AI systems.
+Personal portfolio of Chhatrapathi Sivaji Lakkimsetty, focused on Machine Learning Engineer and Applied AI Engineer roles. The site highlights LLM evaluation, multimodal ML, distributed data pipelines, full-stack delivery, and measurable production outcomes.
 
 ## Tech Stack
 
@@ -38,10 +38,12 @@ styles.css    # Styles and responsive layout
 - NYC Job Salary Prediction — NLP + regression
 - Parameter-Efficient ResNet for CIFAR-10
 - Food-11 Classification & Deployment
+- Full-Stack Library Management System — Java, Spring MVC, MySQL, RBAC
 
 ## Contact
 
 - LinkedIn: https://www.linkedin.com/in/chhatrapathi-sivaji-lakkimsetty/
 - GitHub: https://github.com/chhatrapathisivaji
+- Contact form: https://chhatrapathisivaji.github.io/#contact
 
 © 2026 Chhatrapathi Sivaji Lakkimsetty

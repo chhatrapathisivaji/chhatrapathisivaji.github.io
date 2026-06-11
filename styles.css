@@ -93,6 +93,25 @@ button {
   gap: 32px;
 }
 
+.nav-quick-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.nav-quick-links a {
+  border: 1px solid rgba(0,240,255,0.24);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+.nav-quick-links a:hover,
+.nav-quick-links a:focus {
+  background: rgba(0,240,255,0.08);
+}
+
 .nav-links a {
   font-size: 14px;
   font-weight: 500;
@@ -128,7 +147,8 @@ button {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
+  .nav-links,
+  .nav-quick-links {
     display: none;
   }
   .nav-links.open {
@@ -432,7 +452,12 @@ button {
 
 .fit-header p,
 .projects-sub,
-.skills-sub {
+.skills-sub,
+.positioning-intro,
+.timeline-tech,
+.project-tech-line,
+.core-skills,
+.coursework {
   color: var(--light-gray);
   font-size: 16px;
   line-height: 1.7;
@@ -441,6 +466,19 @@ button {
 .skills-sub {
   max-width: 760px;
   margin: -28px 0 48px;
+}
+
+.core-skills {
+  border: var(--border);
+  color: var(--white);
+  font-family: var(--font-mono);
+  margin: -20px 0 44px;
+  padding: 16px;
+}
+
+.fit-target {
+  color: var(--cyan) !important;
+  margin-top: 18px;
 }
 
 .fit-grid {
@@ -663,6 +701,20 @@ button {
   color: var(--cyan);
 }
 
+.timeline-tech {
+  border-top: var(--border);
+  font-size: 14px;
+  margin-top: 18px;
+  padding-top: 16px;
+}
+
+.timeline-tech strong,
+.project-card-points strong,
+.project-tech-line strong,
+.project-detail strong {
+  color: var(--white);
+}
+
 @media (max-width: 768px) {
   .timeline-item {
     grid-template-columns: 1fr;
@@ -706,6 +758,26 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 32px;
+}
+
+.project-priority {
+  border: var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: -18px 0 40px;
+  padding: 18px;
+}
+
+.project-priority strong {
+  color: var(--white);
+  flex-basis: 100%;
+}
+
+.project-priority a {
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 12px;
 }
 
 .project-card {
@@ -753,6 +825,23 @@ button {
   font-size: 13px;
   color: var(--cyan);
   margin-bottom: 20px;
+}
+
+.project-card-points {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.project-card-points li {
+  color: var(--light-gray);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.project-tech-line {
+  font-size: 13px;
+  margin-bottom: 16px;
 }
 
 .project-metrics {
