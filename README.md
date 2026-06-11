@@ -27,6 +27,7 @@ Then open `http://127.0.0.1:4173/`
 index.html    # Main HTML shell
 script.js     # All portfolio data + rendering logic
 styles.css    # Styles and responsive layout
+assets/       # Project visuals extracted from reports
 ```
 
 ## Featured Projects
@@ -34,7 +35,7 @@ styles.css    # Styles and responsive layout
 - IntelliQuest — Academic Paper Search Engine (React, Django, PostgreSQL, Docker)
 - Sound Scene Synthesis — Generative audio with AudioLDM / TangoFlux
 - FathomNet — Underwater object detection with YOLOv8/v11
-- Harmful Brain Activity Classification — EEG/spectrogram seizure detection
+- Harmful Brain Activity Classification — long-form EEG/spectrogram case study with report visuals
 - Wildlife Trafficking Detection — Multimodal AI with Spark, vision & language models
 - NYC Job Salary Prediction — NLP + regression
 - Parameter-Efficient ResNet for CIFAR-10

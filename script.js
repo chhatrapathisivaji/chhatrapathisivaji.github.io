@@ -227,17 +227,20 @@ const portfolio = {
       type: "Healthcare deep learning",
       course: "Deep Learning Final Project",
       visual: "eeg",
+      articleTitle: "Harmful Brain Activity Classification with Deep Learning on EEG Signals",
+      articleSubtitle:
+        "Using spectrogram-based CNNs and hybrid convolutional-recurrent networks to support neurocritical-care EEG review.",
       summary:
-        "EEG and spectrogram classification system for detecting seizures and harmful brain activity in neurocritical-care recordings.",
+        "A research-driven EEG classification project comparing spectrogram CNNs and hybrid temporal models for harmful brain activity detection.",
       built:
         "Multi-model pipeline using EEGNet, GRU, ResNet, and spectrogram-based EfficientNet inputs over 50-second EEG and 10-minute spectrogram windows.",
       impact:
         "Demonstrated robust seizure and harmful activity detection across 6 classes, with careful generalization analysis across patients and recording conditions.",
       context: "Built as a graduate deep learning project at NYU focused on healthcare signals and careful validation behavior.",
       story: [
-        "Harmful Brain Activity Classification explores how deep learning can support neurocritical-care EEG review by detecting seizure and harmful activity patterns from signal and spectrogram inputs.",
-        "The system compared EEGNet, GRU, ResNet, MobileNet, and EfficientNet-style workflows over 50-second EEG windows and 10-minute spectrogram windows, with attention to validation stability rather than only training accuracy.",
-        "The comparative study showed that hybrid convolutional-recurrent models and spectrogram backbones can capture complementary signal structure across six clinical categories.",
+        "Harmful Brain Activity Classification explores how deep learning can support neurocritical-care EEG review, where expert neurologists often need to scan long recordings under time pressure.",
+        "The project compares EfficientNetB0 spectrogram models, EEGNet-ResNet hybrids, GRU-ResNet architectures, and MobileNet-style baselines across 50-second EEG windows and 10-minute spectrogram neighborhoods.",
+        "Rather than framing the result as a single leaderboard number, the work studies training and validation behavior to understand which architectures generalize more reliably under noisy clinical labels.",
       ],
       metrics: [
         { label: "EEG window", value: "50 sec" },
@@ -248,9 +251,9 @@ const portfolio = {
       links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/DLFinalProject" }],
       details: {
         problem:
-          "Critically ill patients often require EEG monitoring to detect seizures and other harmful brain activity. Manual EEG interpretation depends on specialized neurologists and can be slow, expensive, and vulnerable to fatigue. The project explored deep learning models that classify EEG patterns automatically.",
+          "Critically ill patients often require EEG monitoring to detect seizures and other harmful brain activity. Manual EEG interpretation depends on specialized neurologists and can be slow, expensive, and vulnerable to fatigue-related errors. The project explored whether deep learning models can assist by classifying clinically relevant EEG patterns automatically.",
         dataset:
-          "The report uses HMS Harmful Brain Activity data with metadata files, 50-second EEG segments sampled at 200 Hz, and 10-minute spectrogram windows. Labels cover six expert-voted categories: seizure, LPD, GPD, LRDA, GRDA, and other.",
+          "The project uses the HMS Harmful Brain Activity Classification dataset, pairing raw 50-second EEG segments sampled at 200 Hz with 10-minute spectrogram windows, metadata, and expert vote distributions across six classes: seizure, LPD, GPD, LRDA, GRDA, and other.",
         approach: [
           "Built an EfficientNetB0 pipeline over custom 512 by 512 spectrogram images constructed from Kaggle-provided spectrograms and EEG-derived spectrogram channels.",
           "Implemented an EEGNet plus 1D ResNet architecture to capture spatial EEG patterns and deeper temporal representations.",
@@ -271,6 +274,161 @@ const portfolio = {
         ],
         sources: ["Deep_Learning_Final_Project.pdf"],
       },
+      articleSections: [
+        {
+          title: "Introduction",
+          image: {
+            src: "assets/projects/harmful-brain-activity/eeg-10-20-montage.png",
+            alt: "10-20 EEG electrode montage diagram from the project report",
+            caption: "The project uses EEG signals captured through the international 10-20 electrode placement system.",
+          },
+          paragraphs: [
+            "Electroencephalography is a cornerstone tool in neurocritical care for monitoring brain activity in critically ill patients and detecting seizures early enough to prevent irreversible damage.",
+            "In intensive-care settings, continuous EEG monitoring is common, but interpretation still relies heavily on expert neurologists manually reviewing long recordings. That process is time-consuming, expensive, and vulnerable to fatigue.",
+            "This project explores whether deep learning can assist by classifying harmful brain activity from EEG signals and spectrograms. The focus is not only raw model performance, but also stability, generalization, and how different architectures behave over training and validation.",
+          ],
+        },
+        {
+          title: "Problem And Clinical Patterns",
+          paragraphs: [
+            "The task is framed as a six-class classification problem over 50-second EEG windows and associated 10-minute spectrogram segments. The labels reflect clinically meaningful EEG patterns annotated by experts.",
+            "The annotations include proto-patterns and edge cases from critical-care EEG monitoring, so the dataset is intentionally closer to a real clinical setting than a perfectly clean benchmark.",
+          ],
+          items: [
+            { label: "SZ", text: "Seizures." },
+            { label: "GPD", text: "Generalized periodic discharges." },
+            { label: "LPD", text: "Lateralized periodic discharges." },
+            { label: "LRDA", text: "Lateralized rhythmic delta activity." },
+            { label: "GRDA", text: "Generalized rhythmic delta activity." },
+            { label: "Other", text: "Ambiguous or non-specific patterns." },
+          ],
+        },
+        {
+          title: "Dataset And Representation",
+          image: {
+            src: "assets/projects/harmful-brain-activity/spectrogram-creation.png",
+            alt: "Spectrogram creation workflow from EEG signals",
+            caption: "Raw EEG segments are transformed into image-like spectrogram representations for CNN-based modeling.",
+          },
+          paragraphs: [
+            "The HMS Harmful Brain Activity dataset couples raw EEG segments with spectrograms and rich metadata. Each row in the training metadata describes a 50-second EEG segment, a matched 10-minute spectrogram window, patient-level identifiers, offsets, consensus labels, and expert vote counts.",
+            "The raw EEG files are sampled at 200 Hz, giving 10,000 time steps per segment per channel. The spectrogram files provide time-frequency views aligned with the same clinical episode.",
+          ],
+          items: [
+            { label: "train.csv", text: "Metadata for EEG IDs, spectrogram IDs, patient IDs, offsets, expert consensus, and class vote counts." },
+            { label: "train_eegs", text: "Raw 50-second EEG segments sampled at 200 Hz." },
+            { label: "train_spectrograms", text: "Precomputed spectrogram tiles assembled from EEG data and aligned to metadata offsets." },
+            { label: "Model inputs", text: "Raw EEG sequences, spectrogram windows, expert votes, and consensus labels." },
+          ],
+        },
+        {
+          title: "Methodology Overview",
+          image: {
+            src: "assets/projects/harmful-brain-activity/sample-spectrum-architecture.png",
+            alt: "Sample spectrum and architecture figure from the project report",
+            caption: "The project compares spectrogram-based CNNs with temporal EEG architectures that process raw signal dynamics.",
+          },
+          paragraphs: [
+            "We deliberately explored multiple model families rather than betting on a single architecture. This made the project a comparative study of representation choices, inductive biases, and validation behavior.",
+            "Across all experiments, the key question was practical: which modeling path learns useful EEG structure without becoming brittle under noisy labels and limited compute?",
+          ],
+          items: [
+            { label: "EfficientNetB0", text: "A spectrogram-based CNN pipeline using custom 512 x 512 spectrogram mosaics." },
+            { label: "EEGNet-ResNet", text: "A raw-EEG pipeline combining compact EEGNet-style layers with deeper 1D residual blocks." },
+            { label: "GRU-ResNet", text: "A hybrid model that combines convolutional feature extraction with recurrent temporal modeling." },
+            { label: "Baselines", text: "EEGNet and MobileNet variants used as reference points for stability and generalization." },
+          ],
+        },
+        {
+          title: "Spectrogram-Based EfficientNetB0",
+          paragraphs: [
+            "The EfficientNetB0 model treats EEG-derived time-frequency data as an image-like representation. The base spectrogram input has shape 128 x 256 x 8, where four channels come from Kaggle-provided spectrogram tiles and four channels come from custom spectrograms derived from raw EEG.",
+            "To adapt the input for CNN processing, the first four channels are vertically concatenated into a 512 x 256 image, the EEG-derived channels are concatenated into another 512 x 256 image, and both views are placed side by side to create a 512 x 512 sample.",
+            "The EfficientNetB0 backbone is used without its classification head and without ImageNet initialization because natural images differ heavily from EEG spectrograms. Global average pooling produces a 1280-dimensional feature vector, followed by a dense six-class softmax head.",
+          ],
+          items: [
+            { label: "Loss", text: "Kullback-Leibler divergence, aligning predictions with expert vote distributions." },
+            { label: "Optimizer", text: "Adam with learning rate 1e-3 and a custom learning-rate scheduler." },
+            { label: "Training", text: "Batch size 32, 25 epochs, and TensorFlow MirroredStrategy for multi-GPU execution." },
+          ],
+        },
+        {
+          title: "EEGNet-ResNet Architecture",
+          paragraphs: [
+            "Where EfficientNetB0 works on spectrogram images, the EEGNet-ResNet path operates closer to the raw time-series. It combines EEGNet-style compact convolutions with deeper 1D residual blocks designed for temporal EEG signals.",
+            "The EEGNet component begins with four parallel Conv1D layers using kernel sizes 3, 5, 7, and 9. This allows the model to learn temporal features at several scales before batch normalization, ReLU activations, and a refinement Conv1D layer pass features into residual blocks.",
+            "Nine 1D ResNet blocks add depth through Conv1D layers, batch normalization, ReLU activations, skip connections, and downsampling. Bidirectional GRU layers then aggregate temporal dependencies before the final six-class softmax output.",
+          ],
+        },
+        {
+          title: "GRU-ResNet Hybrid",
+          paragraphs: [
+            "The GRU-ResNet model emphasizes sequence behavior after convolutional feature extraction. Multiple parallel Conv1D layers capture local patterns at different temporal scales, then concatenate those outputs into a richer representation.",
+            "A stack of residual blocks with batch normalization, ReLU, dropout, and max pooling builds deeper signal features. A GRU layer then models long-range temporal dependencies across the 50-second EEG window.",
+            "In the reported configuration, the model used batch size 64, kernel size 2, stride 2, padding 0, 25 epochs, and learning rate 0.001. This hybrid design aims to balance local waveform detection with longer temporal context.",
+          ],
+        },
+        {
+          title: "Training And Validation Behavior",
+          image: {
+            src: "assets/projects/harmful-brain-activity/training-validation-loss.png",
+            alt: "Training and validation loss curves for EEGNet, MobileNet, EfficientNet, and GRU models",
+            caption: "Loss curves were central to the analysis because stable validation behavior matters more than a single headline score in clinical ML settings.",
+          },
+          paragraphs: [
+            "We compared EEGNet, MobileNet, EfficientNet, and the GRU-based hybrid over 25 epochs. Instead of relying only on final accuracy, we studied training and validation loss curves to understand convergence, overfitting, and stability.",
+          ],
+          items: [
+            { label: "GRU", text: "Training loss declined smoothly from roughly 0.6 to 0.2, while validation loss stayed close to the training curve, indicating strong generalization." },
+            { label: "EfficientNet", text: "Training loss decreased more conservatively and validation loss stayed low with minor spikes, making it a stable spectrogram baseline." },
+            { label: "MobileNet", text: "Loss curves fluctuated heavily, suggesting sensitivity to hyperparameters, batch composition, or insufficient regularization." },
+            { label: "EEGNet", text: "Training improved over time, but validation loss remained higher than the stronger models under this configuration." },
+          ],
+        },
+        {
+          title: "Key Results And Insights",
+          paragraphs: [
+            "The most important outcome was comparative rather than a single best score. GRU-based architectures showed the strongest generalization pattern, with validation loss staying close to training loss and little evidence of severe overfitting.",
+            "EfficientNet on spectrogram mosaics remained a strong and stable alternative, reinforcing that image backbones can work well when EEG is represented carefully in time-frequency space.",
+            "MobileNet and EEGNet were less stable in this setup, which underscores that architecture choice, representation design, and training regime matter heavily for noisy EEG classification tasks.",
+          ],
+          items: [
+            { label: "Representation matters", text: "Spectrogram construction changed how effectively CNN backbones could learn EEG structure." },
+            { label: "Inductive bias matters", text: "Hybrid convolutional-recurrent models matched the temporal nature of EEG more naturally than compact CNN-only designs." },
+            { label: "Generalization matters", text: "For clinical support, predictable validation behavior is more useful than a brittle model with impressive training loss." },
+          ],
+        },
+        {
+          title: "Limitations",
+          paragraphs: [
+            "The project is a strong graduate research study, but it also has clear boundaries that are important to state honestly.",
+          ],
+          items: [
+            { label: "Limited hyperparameter tuning", text: "Compute constraints led to a fixed set of hyperparameters instead of extensive automated search." },
+            { label: "Label noise", text: "Proto-patterns and edge cases add ambiguity, making evaluation more realistic but also more difficult." },
+            { label: "Single-dataset scope", text: "The models were evaluated on HMS data only; broader validation across other EEG corpora would strengthen deployment claims." },
+          ],
+        },
+        {
+          title: "Future Work",
+          paragraphs: [
+            "The next step would be to turn this comparative study into a more robust clinical ML pipeline with calibration, uncertainty, and broader validation.",
+          ],
+          items: [
+            { label: "Ensembles", text: "Combine GRU-based models with spectrogram CNNs to exploit complementary strengths." },
+            { label: "EEG-specific features", text: "Add frequency-band features, biomarkers, or connectivity measures for interpretability." },
+            { label: "Regularization", text: "Use Mixup, label smoothing, dropout tuning, and stronger optimization schedules to improve unstable baselines." },
+            { label: "Uncertainty estimation", text: "Calibrate probability outputs so the model can communicate uncertainty in high-cost false-negative settings." },
+          ],
+        },
+        {
+          title: "My Role",
+          paragraphs: [
+            "This was a three-person NYU Deep Learning course project. My contributions focused on implementing and comparing deep learning pipelines for EEG and spectrogram classification, analyzing training and validation behavior across model families, and helping synthesize the results into a coherent experimental narrative.",
+            "I co-designed and implemented multiple deep learning pipelines - EfficientNetB0 on custom spectrogram mosaics, EEGNet-ResNet hybrids, and GRU-ResNet architectures - then led the comparative analysis of training and validation behavior to understand generalization under clinically noisy EEG labels.",
+          ],
+        },
+      ],
     },
     {
       slug: "resnet-cifar10-under-5m",
@@ -885,7 +1043,8 @@ function renderProjectDetail(slug) {
     <article class="project-detail-inner project-detail">
       <a class="project-detail-back" href="#projects">← Back to projects</a>
       <p class="project-meta"><span>${project.type}</span><span>${project.dates}</span><span>${project.course}</span></p>
-      <h1>${project.title}</h1>
+      <h1>${project.articleTitle || project.title}</h1>
+      ${project.articleSubtitle ? `<p class="project-detail-subtitle">${project.articleSubtitle}</p>` : ""}
       ${project.context ? `<p class="project-context project-context-large">${project.context}</p>` : ""}
       <div class="project-story project-story-detail">
         ${story.map((paragraph) => `<p>${paragraph}</p>`).join("")}
@@ -899,12 +1058,18 @@ function renderProjectDetail(slug) {
         ${project.stack.map((item) => `<span class="project-tech">${item}</span>`).join("")}
       </div>
 
-      ${renderDetailBlock("Problem", project.details.problem)}
-      ${renderDetailBlock("Dataset", project.details.dataset)}
-      ${renderDetailList("Approach", project.details.approach)}
-      ${renderDetailList("Results", project.details.results)}
-      ${renderDetailBlock("My Role", project.details.role)}
-      ${renderDetailList("Technical Takeaways", project.details.takeaways)}
+      ${
+        project.articleSections
+          ? renderArticleSections(project.articleSections)
+          : `
+              ${renderDetailBlock("Problem", project.details.problem)}
+              ${renderDetailBlock("Dataset", project.details.dataset)}
+              ${renderDetailList("Approach", project.details.approach)}
+              ${renderDetailList("Results", project.details.results)}
+              ${renderDetailBlock("My Role", project.details.role)}
+              ${renderDetailList("Technical Takeaways", project.details.takeaways)}
+            `
+      }
 
       ${
         project.links
@@ -942,6 +1107,44 @@ function renderProjectDetail(slug) {
     requestAnimationFrame(resetScroll);
   });
   [80, 180, 360].forEach((delay) => setTimeout(resetScroll, delay));
+}
+
+function renderArticleSections(sections) {
+  return sections.map((section) => renderArticleSection(section)).join("");
+}
+
+function renderArticleSection(section) {
+  return `
+    <section class="case-section article-section">
+      <h2>${section.title}</h2>
+      ${section.image ? renderArticleFigure(section.image) : ""}
+      ${section.paragraphs ? section.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("") : ""}
+      ${section.items ? renderArticleItems(section.items) : ""}
+    </section>
+  `;
+}
+
+function renderArticleFigure(image) {
+  return `
+    <figure class="case-figure">
+      <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+      <figcaption>${image.caption}</figcaption>
+    </figure>
+  `;
+}
+
+function renderArticleItems(items) {
+  return `
+    <ul class="article-list">
+      ${items
+        .map((item) =>
+          typeof item === "string"
+            ? `<li>${item}</li>`
+            : `<li><strong>${item.label}:</strong> ${item.text}</li>`
+        )
+        .join("")}
+    </ul>
+  `;
 }
 
 function renderDetailBlock(title, body) {
