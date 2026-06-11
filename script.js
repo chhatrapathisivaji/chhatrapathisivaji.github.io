@@ -26,9 +26,10 @@ const portfolio = {
       place: "New York, NY",
       dates: "Oct 2025 - Present",
       details: [
-        "Built execution-based validation pipelines for LLM-generated code, raising test pass rates from 60% to 87%+ and cutting invalid downstream code.",
+        "Led development of execution-based validation pipelines for LLM-generated code, raising test pass rates from 60% to 87%+ and significantly reducing invalid downstream code.",
         "Engineered latency-optimized inference paths (batching, caching, streamlined routing), reducing end-to-end pipeline latency from 1.8s to 1.1s while maintaining model quality.",
-        "Translated qualitative user feedback into measurable evaluation criteria and guardrails for LLM-driven features in partnership with PMs and engineers.",
+        "Collaborated with PMs and engineers to turn qualitative user feedback into measurable evaluation criteria and guardrails for LLM-driven features.",
+        "Designed experiments and ablation studies to analyze model failure modes, informing iteration on prompts, routing, and guardrail policies.",
         "Developed adversarial and edge-case test suites for agentic systems, doubling unique failure-mode coverage and improving robustness on unseen scenarios by ~20%.",
       ],
       tech: "Python, PyTorch, internal evaluation frameworks, cloud services.",
@@ -40,7 +41,7 @@ const portfolio = {
       dates: "Jun 2022 - May 2023",
       details: [
         "Architected an end-to-end risk analytics pipeline using hierarchical clustering to segment 1M+ customer profiles, mitigating an estimated $4.5M in credit-default and compliance risk.",
-        "Engineered automated time-series forecasting frameworks with RNN architectures, achieving 90%+ prediction accuracy across a $10M+ at-risk portfolio.",
+        "Engineered automated time-series forecasting frameworks with RNN architectures for a $10M+ at-risk B2B credit portfolio, achieving 90%+ prediction accuracy.",
         "Deployed an AI-powered chatbot using Azure Bot Framework and Tiny-RoBERTa to support 10,000+ daily queries, then improved real-time engagement by 60% via an active-learning QnA pipeline.",
       ],
       tech: "Python, scikit-learn, RNNs, Azure Bot Framework, Tiny-RoBERTa, SQL, dashboards.",
@@ -52,21 +53,10 @@ const portfolio = {
       dates: "Oct 2021 - Jun 2022",
       details: [
         "Built scalable ETL pipelines using PySpark and advanced SQL to process 500GB+ of industrial data, accelerating downstream ML deployments by 30%.",
-        "Ran hypothesis-driven A/B tests with Python, pandas, and SciPy, informing product changes that delivered a 15% uplift in user retention.",
+        "Ran hypothesis-driven A/B tests with Python, pandas, and SciPy for product and operations experiments, informing changes that delivered a 15% uplift in user retention.",
         "Designed Tableau dashboards and anomaly-detection models that surfaced $500K+ in strategic opportunities and reduced processing anomalies by 40%.",
       ],
       tech: "PySpark, SQL, Python, SciPy, Tableau, SparkSQL, Hadoop.",
-    },
-    {
-      role: "Graduate AI/ML Research And Engineering",
-      organization: "New York University",
-      place: "New York, NY",
-      dates: "Sep 2023 - May 2025",
-      details: [
-        "Completed graduate study in computer science with applied work across machine learning, deep learning, computer vision, big data, information visualization, machine listening, algorithms, and software engineering.",
-        "Built report-backed ML systems across generative audio, EEG analysis, underwater vision, salary prediction, food classification, and multimodal wildlife-trade detection.",
-      ],
-      tech: "PyTorch, TensorFlow, Spark, Python, Docker, modern CV and NLP models.",
     },
     {
       role: "Software Engineer",
@@ -92,6 +82,11 @@ const portfolio = {
       summary: "A specialized search engine for academic papers with personalized recommendations, advanced filtering, and AI-powered relevance ranking for students, researchers, and faculty.",
       built: "Full-stack system with React, Django, PostgreSQL, and GPT-powered semantic search, including indexing, filters, and recommendation logic in a 5-person team.",
       impact: "Delivered a live deployment used by students and faculty, improving the relevance and speed of academic literature discovery.",
+      story: [
+        "IntelliQuest is a specialized academic paper search engine built to help students, researchers, and faculty move beyond keyword search toward semantically relevant recommendations.",
+        "I helped design and implement the full-stack system in a five-person team, using React and Django backed by PostgreSQL. The product combines custom indexing, metadata filters, reading-list workflows, and GPT-powered relevance ranking.",
+        "The deployed system made literature discovery faster and more focused, while giving me end-to-end experience across retrieval design, backend integration, frontend workflows, and cloud deployment.",
+      ],
       metrics: [
         { label: "Team size", value: "5" },
         { label: "Role", value: "Collaborator" },
@@ -136,6 +131,12 @@ const portfolio = {
         "Diffusion-based text-to-audio pipelines with CLAP-aligned conditioning, wavelet features via Kymatio, and a VAE-based reconstruction module.",
       impact:
         "Improved Frechet Audio Distance from a 62.68 baseline to 51.08 on the dev set, demonstrating better text-to-audio alignment and generative quality.",
+      context: "Developed as part of a graduate research project in machine listening at NYU.",
+      story: [
+        "Sound Scene Synthesis is a DCASE 2024 Task 7 text-to-audio system that explores how far diffusion models can go in generating plausible acoustic scenes from textual descriptions.",
+        "To address the task, I worked with diffusion-based pipelines built on AudioLDM, Tango2, and TangoFlux, then augmented the design with CLAP-aligned conditioning, wavelet-scattering features, and a VAE reconstruction module.",
+        "On the official dev set, the strongest configuration improved Frechet Audio Distance from 62.68 to 51.08, showing measurable gains in text-audio alignment and generative quality under the DCASE metric.",
+      ],
       metrics: [
         { label: "Best dev FAD", value: "51.08" },
         { label: "Baseline dev FAD", value: "62.68" },
@@ -181,6 +182,12 @@ const portfolio = {
         "Detection and OOD pipelines with underwater-specific preprocessing, YOLO fine-tuning, and feature-extraction workflows for downstream classifiers.",
       impact:
         "Achieved 97.12% OOD accuracy and 91% SAUC on 5,950 underwater images, demonstrating robust detection and recognition under challenging visual conditions.",
+      context: "Built as a graduate computer vision project at NYU with a focus on robust recognition under domain shift.",
+      story: [
+        "FathomNet studies underwater object detection in a setting where depth, lighting, camera conditions, and incomplete annotations create serious distribution shift.",
+        "The project compared YOLOv8 and YOLOv11 variants, underwater-specific wavelet preprocessing, and feature-extraction workflows that separate in-distribution images from deeper out-of-distribution samples.",
+        "The strongest OOD pipeline reached 97.12% accuracy and 91% SAUC on 5,950 underwater images, showing how detection, preprocessing, and explicit uncertainty handling can work together in difficult visual environments.",
+      ],
       metrics: [
         { label: "Images", value: "5,950" },
         { label: "OOD accuracy", value: "97.12%" },
@@ -226,6 +233,12 @@ const portfolio = {
         "Multi-model pipeline using EEGNet, GRU, ResNet, and spectrogram-based EfficientNet inputs over 50-second EEG and 10-minute spectrogram windows.",
       impact:
         "Demonstrated robust seizure and harmful activity detection across 6 classes, with careful generalization analysis across patients and recording conditions.",
+      context: "Built as a graduate deep learning project at NYU focused on healthcare signals and careful validation behavior.",
+      story: [
+        "Harmful Brain Activity Classification explores how deep learning can support neurocritical-care EEG review by detecting seizure and harmful activity patterns from signal and spectrogram inputs.",
+        "The system compared EEGNet, GRU, ResNet, MobileNet, and EfficientNet-style workflows over 50-second EEG windows and 10-minute spectrogram windows, with attention to validation stability rather than only training accuracy.",
+        "The comparative study showed that hybrid convolutional-recurrent models and spectrogram backbones can capture complementary signal structure across six clinical categories.",
+      ],
       metrics: [
         { label: "EEG window", value: "50 sec" },
         { label: "Spectrogram window", value: "10 min" },
@@ -272,6 +285,11 @@ const portfolio = {
         "Compact residual network with Squeeze-and-Excitation blocks, regularization, and architectural tweaks to meet strict parameter constraints.",
       impact:
         "Reached 93.67% test accuracy with 4.70M parameters, improving over a 0.2790 test-loss baseline under the same budget.",
+      story: [
+        "This project asked a practical model-design question: how much CIFAR-10 accuracy can a residual network deliver while staying under a strict 5 million trainable-parameter ceiling?",
+        "The final architecture used compact residual groups, 3 by 3 convolutions, shortcut projections, batch normalization, dropout, and Squeeze-and-Excitation blocks to improve representation quality without inflating model size.",
+        "The model reached 93.67% test accuracy with 4.70M parameters, turning the project into a focused study of accuracy, regularization, and parameter efficiency.",
+      ],
       metrics: [
         { label: "Accuracy", value: "93.67%" },
         { label: "Test loss", value: "0.2790" },
@@ -318,6 +336,11 @@ const portfolio = {
         "End-to-end deployment pipeline with Kubernetes YAML, model selection, and resource-constrained benchmarking for real-world inference scenarios.",
       impact:
         "Improved accuracy from 0.7621 to 0.8892 while keeping best-response time at 0.72 seconds within memory and CPU limits.",
+      story: [
+        "Food-11 Classification studied the gap between benchmark accuracy and deployment practicality for image classifiers that need to run under memory, CPU, and response-time constraints.",
+        "I compared VGG16, MobileNet, and Xception pipelines, fine-tuned the stronger models, and interpreted accuracy alongside Kubernetes-style resource requirements instead of treating deployment as an afterthought.",
+        "The best model improved validation accuracy from 0.7621 to 0.8892, while the final recommendation balanced accuracy, response time, CPU, and memory tradeoffs for real-world inference.",
+      ],
       metrics: [
         { label: "Best accuracy", value: "0.8892" },
         { label: "Baseline accuracy", value: "0.7621" },
@@ -363,6 +386,11 @@ const portfolio = {
         "End-to-end pipeline from messy civic data ingestion and text processing to statistical tests, model selection, and tuned ensemble regressors.",
       impact:
         "Achieved an R² of 0.8478 on 6,634 rows with 30 engineered features, capturing key drivers of salary bands.",
+      story: [
+        "NYC Job Salary Range Prediction uses public job-posting data to estimate salary bands from structured role metadata and noisy free-form descriptions.",
+        "I built the pipeline from data cleaning and text processing through feature engineering, ANOVA-style analysis, model comparison, cross-validation, and tuned Random Forest and XGBoost regressors.",
+        "The strongest configuration achieved an R2 of 0.8478 on 6,634 rows with 30 engineered features, making the model useful for job-market analysis and compensation benchmarking.",
+      ],
       metrics: [
         { label: "Rows", value: "6,634" },
         { label: "Features", value: "30" },
@@ -408,6 +436,12 @@ const portfolio = {
     "Spark-based feature engineering pipeline plus multimodal model with EfficientNet for images, DistilBERT for text, and cross-attention over structured features.",
   impact:
     "Reached 94.08% accuracy, 93.02% recall, and 85.11% precision, prioritizing high recall on a real-world classification problem.",
+  context: "Built as a graduate project at NYU focusing on multimodal systems and responsible AI.",
+  story: [
+    "Wildlife Trafficking Detection is a multimodal screening system for suspicious wildlife-trade ads, where text, images, prices, and location can each carry partial signals.",
+    "I contributed to a Spark-based feature engineering pipeline and a multimodal model that combines EfficientNet image features, DistilBERT text features, and structured metadata through cross-modal fusion.",
+    "The system achieved 94.08% accuracy, 93.02% recall, and 85.11% precision, intentionally prioritizing recall so fewer suspicious listings would be missed in a high-stakes screening workflow.",
+  ],
   metrics: [
     { label: "Accuracy", value: "94.08%" },
     { label: "Recall", value: "93.02%" },
@@ -459,6 +493,11 @@ const portfolio = {
         "Full-stack system with Java, Spring MVC, and MySQL including RBAC, transactional operations, and reporting views.",
       impact:
         "Demonstrated concrete software engineering skills in authentication, relational data modeling, and workflow implementation beyond ML projects.",
+      story: [
+        "The Library Management System is a full-stack application for catalog search, issuing, returns, reservations, inventory management, and administrative oversight.",
+        "I designed the workflow around Java, Spring MVC, MySQL, and role-based access control, giving patrons and administrators separate paths through the same relational data model.",
+        "The project is intentionally more software-engineering focused, showing the web, database, authentication, and workflow foundations that later carry into AI product delivery.",
+      ],
       metrics: [
         { label: "Stack", value: "Java" },
         { label: "Database", value: "MySQL" },
@@ -514,6 +553,10 @@ const portfolio = {
       group: "Model Families",
       items: ["YOLOv8", "YOLOv11", "EfficientNet", "DistilBERT", "Tiny-RoBERTa", "XGBoost", "Random Forest"],
     },
+    {
+      group: "Research And Communication",
+      items: ["Experimental design and ablation studies", "Model evaluation and error analysis", "Academic report writing and presentations", "Reproducible ML workflows"],
+    },
   ],
   skillStories: [
     {
@@ -543,14 +586,19 @@ const portfolio = {
       dates: "Sep 2023 - May 2025",
       details:
         "Master of Science in Computer Science, New York, NY. Graduate study focused on AI/ML, data science, systems, and applied research projects.",
+      highlights: [
+        "Graduate AI/ML Research and Engineering (Selected Projects): built report-backed ML systems across generative audio, EEG analysis, underwater vision, salary prediction, food classification, and multimodal wildlife-trade detection, focusing on rigorous evaluation and reproducibility.",
+      ],
       coursework:
-        "Selected coursework: Machine Learning, Deep Learning, Big Data, Computer Vision, Information Visualization, Machine Listening, Algorithms, Software Engineering.",
+        "Coursework: Machine Learning, Deep Learning, Big Data, Computer Vision, Information Visualization, Machine Listening, Algorithms, Software Engineering, Cognitive Computational Modelling.",
     },
     {
       school: "KL University",
       dates: "Jun 2018 - Apr 2022",
       details:
         "Bachelor of Science in Computer Science and Engineering with Artificial Intelligence, Vijayawada, India.",
+      coursework:
+        "Relevant coursework: Data Structures, Algorithms, Machine Learning, Artificial Intelligence, Database Systems, Operating Systems.",
     },
   ],
   certifications: [
@@ -581,17 +629,29 @@ const projectFilterLabels = [
   { id: "systems", label: "Systems" },
 ];
 
-const projectCategoryBySlug = {
-  intelliquest: "systems",
-  "sound-scene-synthesis": "ai",
-  "fathomnet-visual-categorization": "vision",
-  "harmful-brain-activity-classification": "ai",
-  "resnet-cifar10-under-5m": "vision",
-  "food11-ml-deployment": "systems",
-  "nyc-salary-range-prediction": "data",
-  "wildlife-trafficking-ads": "ai",
-  "library-management-system": "systems",
+const projectCategoriesBySlug = {
+  intelliquest: ["ai", "systems"],
+  "sound-scene-synthesis": ["ai", "data"],
+  "fathomnet-visual-categorization": ["ai", "vision", "data"],
+  "harmful-brain-activity-classification": ["ai", "vision", "data"],
+  "resnet-cifar10-under-5m": ["ai", "vision"],
+  "food11-ml-deployment": ["ai", "vision", "systems"],
+  "nyc-salary-range-prediction": ["ai", "data"],
+  "wildlife-trafficking-ads": ["ai", "data", "vision"],
+  "library-management-system": ["systems"],
 };
+
+const projectDisplayOrder = [
+  "sound-scene-synthesis",
+  "wildlife-trafficking-ads",
+  "fathomnet-visual-categorization",
+  "harmful-brain-activity-classification",
+  "nyc-salary-range-prediction",
+  "resnet-cifar10-under-5m",
+  "food11-ml-deployment",
+  "intelliquest",
+  "library-management-system",
+];
 
 function renderGoals() {
   byId("goalGrid").innerHTML = portfolio.goals
@@ -682,21 +742,27 @@ function renderProjectVisual(kind) {
 }
 
 function renderProjects() {
-  byId("projectGrid").innerHTML = portfolio.projects
+  const orderedProjects = projectDisplayOrder
+    .map((slug) => portfolio.projects.find((project) => project.slug === slug))
+    .filter(Boolean);
+
+  byId("projectGrid").innerHTML = orderedProjects
     .map(
-      (project) => `
-        <a class="project-card" data-category="${projectCategoryBySlug[project.slug]}" href="#project/${project.slug}" aria-label="View detailed case study for ${project.title}">
+      (project) => {
+        const categories = projectCategoriesBySlug[project.slug] || [];
+        const story = project.story || [project.summary, project.built, project.impact];
+        return `
+        <a class="project-card" data-categories="${categories.join(" ")}" href="#project/${project.slug}" aria-label="View detailed case study for ${project.title}">
           ${renderProjectVisual(project.visual)}
           <div class="project-meta">
             <span>${project.type}</span>
             <span>${project.dates}</span>
           </div>
           <h3>${project.title}</h3>
-          <p class="project-summary">${project.summary}</p>
-          <ul class="project-card-points">
-            <li><strong>What I built:</strong> ${project.built}</li>
-            <li><strong>Impact:</strong> ${project.impact}</li>
-          </ul>
+          ${project.context ? `<p class="project-context">${project.context}</p>` : ""}
+          <div class="project-story">
+            ${story.slice(0, 3).map((paragraph) => `<p>${paragraph}</p>`).join("")}
+          </div>
           <div class="project-metrics">
             ${project.metrics.map((metric) => `<span class="project-metric"><strong>${metric.value}</strong><span>${metric.label}</span></span>`).join("")}
           </div>
@@ -706,7 +772,8 @@ function renderProjects() {
           </div>
           <span class="project-cta">View case study <span>↗</span></span>
         </a>
-      `
+      `;
+      }
     )
     .join("");
 }
@@ -739,7 +806,8 @@ function bindProjectFilters() {
     byId("projectGrid")
       .querySelectorAll(".project-card")
       .forEach((card) => {
-        const visible = filter === "all" || card.dataset.category === filter;
+        const categories = (card.dataset.categories || "").split(" ");
+        const visible = filter === "all" || categories.includes(filter);
         card.classList.toggle("is-filtered-out", !visible);
       });
   });
@@ -782,6 +850,11 @@ function renderEducation() {
           <span class="education-date">${item.dates}</span>
           <h3>${item.school}</h3>
           <p>${item.details}</p>
+          ${
+            item.highlights
+              ? `<ul class="education-highlights">${item.highlights.map((highlight) => `<li>${highlight}</li>`).join("")}</ul>`
+              : ""
+          }
           ${item.coursework ? `<p class="coursework">${item.coursework}</p>` : ""}
         </article>
       `
@@ -798,6 +871,7 @@ function renderCertifications() {
 function renderProjectDetail(slug) {
   const project = portfolio.projects.find((item) => item.slug === slug);
   const detail = byId("projectDetail");
+  const story = project ? project.story || [project.summary, project.built, project.impact] : [];
 
   if (!project) {
     document.body.classList.remove("detail-mode");
@@ -812,9 +886,10 @@ function renderProjectDetail(slug) {
       <a class="project-detail-back" href="#projects">← Back to projects</a>
       <p class="project-meta"><span>${project.type}</span><span>${project.dates}</span><span>${project.course}</span></p>
       <h1>${project.title}</h1>
-      <p>${project.summary}</p>
-      <p><strong>What I built:</strong> ${project.built}</p>
-      <p><strong>Impact:</strong> ${project.impact}</p>
+      ${project.context ? `<p class="project-context project-context-large">${project.context}</p>` : ""}
+      <div class="project-story project-story-detail">
+        ${story.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+      </div>
       <div class="project-metrics">
         ${project.metrics.map((metric) => `<span class="project-metric"><strong>${metric.value}</strong><span>${metric.label}</span></span>`).join("")}
       </div>
@@ -830,11 +905,6 @@ function renderProjectDetail(slug) {
       ${renderDetailList("Results", project.details.results)}
       ${renderDetailBlock("My Role", project.details.role)}
       ${renderDetailList("Technical Takeaways", project.details.takeaways)}
-
-      <h2>Sources Used</h2>
-      <ul>
-        ${project.details.sources.map((source) => `<li>${source}</li>`).join("")}
-      </ul>
 
       ${
         project.links

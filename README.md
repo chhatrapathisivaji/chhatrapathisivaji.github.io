@@ -4,12 +4,13 @@ Live at: https://chhatrapathisivaji.github.io/
 
 ## About
 
-Personal portfolio of Chhatrapathi Sivaji Lakkimsetty, focused on Machine Learning Engineer and Applied AI Engineer roles. The site highlights LLM evaluation, multimodal ML, distributed data pipelines, full-stack delivery, and measurable production outcomes.
+Personal portfolio of Chhatrapathi Sivaji Lakkimsetty, focused on Machine Learning Engineer and Applied AI Engineer roles. The site highlights LLM evaluation, multimodal ML, distributed data pipelines, graduate AI/ML projects at NYU, full-stack delivery, and measurable production outcomes.
 
 ## Tech Stack
 
 - Pure HTML / CSS / JavaScript (no framework)
 - Single-page application with hash-based routing
+- Multi-category project filtering for AI, Data, Vision, and Systems work
 - Fully static — hosted on GitHub Pages
 
 ## Run Locally
