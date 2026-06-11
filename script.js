@@ -125,17 +125,20 @@ const portfolio = {
       type: "Generative audio",
       course: "ECE-GY 9173 Machine Listening",
       visual: "audio",
+      articleTitle: "Sound Scene Synthesis for DCASE 2024 Task 7",
+      articleSubtitle:
+        "Combining AudioLDM, Tango2, and TangoFlux with wavelet-based representations to generate realistic, text-conditioned environmental soundscapes.",
       summary:
-        "A DCASE 2024 Task 7 text-to-audio synthesis system exploring AudioLDM, Tango2, TangoFlux, and wavelet-scattering representations.",
+        "A research-style text-to-audio synthesis project for DCASE 2024 Task 7, comparing AudioLDM, Tango2, TangoFlux, and wavelet-scattering representations.",
       built:
         "Diffusion-based text-to-audio pipelines with CLAP-aligned conditioning, wavelet features via Kymatio, and a VAE-based reconstruction module.",
       impact:
         "Improved Frechet Audio Distance from a 62.68 baseline to 51.08 on the dev set, demonstrating better text-to-audio alignment and generative quality.",
       context: "Developed as part of a graduate research project in machine listening at NYU.",
       story: [
-        "Sound Scene Synthesis is a DCASE 2024 Task 7 text-to-audio system that explores how far diffusion models can go in generating plausible acoustic scenes from textual descriptions.",
-        "To address the task, I worked with diffusion-based pipelines built on AudioLDM, Tango2, and TangoFlux, then augmented the design with CLAP-aligned conditioning, wavelet-scattering features, and a VAE reconstruction module.",
-        "On the official dev set, the strongest configuration improved Frechet Audio Distance from 62.68 to 51.08, showing measurable gains in text-audio alignment and generative quality under the DCASE metric.",
+        "Sound Scene Synthesis explores how modern text-to-audio diffusion models can generate short environmental soundscapes from prompts that describe both a foreground source and acoustic background.",
+        "The project re-implements the AudioLDM baseline, studies the AudioLDM/Tango2 state-of-the-art pipeline, and tests whether TangoFlux plus wavelet-scattering representations can improve semantic alignment and generative quality.",
+        "On the 60-sample development set, AudioLDM/TangoFlux produced the strongest measured result with FAD 51.08, improving over the AudioLDM baseline at 62.68 and the AudioLDM/Tango2 configuration at 53.59.",
       ],
       metrics: [
         { label: "Best dev FAD", value: "51.08" },
@@ -168,6 +171,205 @@ const portfolio = {
         ],
         sources: ["Final_Report.pdf"],
       },
+      articleSections: [
+        {
+          title: "Introduction",
+          image: {
+            src: "assets/projects/sound-scene-synthesis/system-overview.png",
+            alt: "Overview diagram of the sound scene synthesis system",
+            caption: "DCASE 2024 Task 7 maps natural-language prompts to 4-second generated environmental audio clips.",
+          },
+          paragraphs: [
+            "Sound scene synthesis aims to generate realistic environmental audio from natural-language descriptions, such as a dog barking in a park with distant traffic noise.",
+            "In DCASE 2024 Task 7, systems receive text prompts and generate a 4-second mono waveform at 32 kHz. Each prompt describes a foreground source and acoustic background, and the generated clips must avoid music or intelligible speech.",
+            "This project re-implements the official AudioLDM baseline, studies an AudioLDM/Tango2 state-of-the-art pipeline, and proposes an AudioLDM/TangoFlux-wavelet direction that combines a faster preference-aligned backbone with wavelet scattering representations.",
+          ],
+        },
+        {
+          title: "Task Definition And Baseline",
+          image: {
+            src: "assets/projects/sound-scene-synthesis/audioldm-baseline.png",
+            alt: "AudioLDM baseline pipeline with VAE, CLAP, latent diffusion, and HiFi-GAN",
+            caption: "The AudioLDM baseline compresses audio, conditions generation with CLAP embeddings, denoises in latent space, and reconstructs waveforms with a vocoder.",
+          },
+          paragraphs: [
+            "The expected system output is a Python dictionary where each key is a text prompt and each value is a NumPy array representing the raw waveform.",
+            "The official baseline adapts AudioLDM, a latent diffusion framework for environmental audio synthesis. It uses language-audio alignment through CLAP and iterative denoising through a U-Net latent diffusion model.",
+          ],
+          items: [
+            { label: "VAE encoder", text: "Compresses mel-spectrograms into compact latent representations." },
+            { label: "CLAP encoder", text: "Maps text prompts and audio into a shared embedding space for cross-modal conditioning." },
+            { label: "Latent diffusion model", text: "Generates new audio latents from noise using classifier-free guidance." },
+            { label: "VAE decoder and HiFi-GAN", text: "Reconstructs mel-spectrograms and converts them into time-domain waveforms." },
+          ],
+        },
+        {
+          title: "AudioLDM + Tango2",
+          image: {
+            src: "assets/projects/sound-scene-synthesis/tango2-architecture.png",
+            alt: "Tango2 architecture and preference optimization diagram",
+            caption: "Tango2 improves text-to-audio alignment by using direct preference optimization and stronger language conditioning.",
+          },
+          paragraphs: [
+            "The state-of-the-art reference system combines AudioLDM with Tango2, an improved version of Tango that fine-tunes diffusion-based text-to-audio generation with direct preference optimization.",
+            "Tango2 improves semantic accuracy and perceptual quality, while AudioLDM contributes diversity and robustness. The strongest strategy selectively replaces low-alignment AudioLDM outputs with Tango2 generations based on CLAP similarity.",
+          ],
+          items: [
+            { label: "Semantic alignment", text: "Tango2 produces audio that better matches the prompt semantics." },
+            { label: "Diversity", text: "AudioLDM remains useful because its generation pipeline can enrich variation across environmental scenes." },
+            { label: "Selective replacement", text: "Low-similarity outputs are replaced by stronger Tango2 generations to improve prompt alignment." },
+          ],
+        },
+        {
+          title: "TangoFlux Backbone",
+          image: {
+            src: "assets/projects/sound-scene-synthesis/tangoflux-training.png",
+            alt: "TangoFlux training pipeline with flow matching and CRPO",
+            caption: "TangoFlux uses flow matching and CLAP-ranked preference optimization to improve text-audio alignment efficiently.",
+          },
+          paragraphs: [
+            "TangoFlux is a newer Tango-family model designed for faster and more faithful text-to-audio generation. It uses a hybrid Transformer architecture with 6 Multimodal Diffusion Transformer blocks and 18 Diffusion Transformer blocks, totaling about 515M parameters.",
+            "Training has two stages: flow-matching pre-training on WavCaps and AudioCaps, followed by online iterative alignment where generated candidates are ranked with a CLAP-based reward and optimized through CLAP-Ranked Preference Optimization.",
+            "Compared with Tango2, TangoFlux is especially attractive for this task because it handles complex multi-event prompts and can generate audio much faster under fewer sampling steps.",
+          ],
+        },
+        {
+          title: "Why TangoFlux Over Tango2",
+          image: {
+            src: "assets/projects/sound-scene-synthesis/metric-comparison.png",
+            alt: "Metric comparison chart for Tango2 and TangoFlux",
+            caption: "TangoFlux improves most objective metrics used for text-audio alignment, fidelity, and diversity.",
+          },
+          paragraphs: [
+            "The report positions TangoFlux as a stronger backbone because it improves most objective measures over Tango2, including CLAP score for semantic alignment and FDopenl3 for fidelity.",
+            "TangoFlux also offers a practical runtime advantage: it can generate 30 seconds of audio in 3.7 seconds with 50 steps, while Tango2 requires 22.8 seconds for 10 seconds of audio with 200 steps.",
+          ],
+          items: [
+            { label: "Alignment", text: "Higher CLAP scores suggest stronger prompt-audio correspondence." },
+            { label: "Fidelity", text: "Lower FDopenl3 indicates better distributional quality." },
+            { label: "Speed", text: "Flow matching reduces the number of sampling steps needed for usable generation." },
+          ],
+        },
+        {
+          title: "Wavelet Scattering Representation",
+          paragraphs: [
+            "Mel-spectrograms are useful, but their averaging can discard non-stationary details such as attacks, amplitude modulations, vibrato, and time-varying spectral structure.",
+            "The wavelet scattering transform addresses this by applying cascaded wavelet decompositions and modulus operations. The resulting higher-order coefficients preserve richer signal dynamics that can matter for environmental soundscapes.",
+            "The project hypothesis is that replacing mel-spectrogram targets with wavelet scattering representations could lower FAD by giving the generative system a more informative intermediate representation.",
+          ],
+          items: [
+            { label: "Fine-grained dynamics", text: "Wavelet scattering captures attacks, modulations, and complex temporal envelopes." },
+            { label: "Robust features", text: "Scattering coefficients provide structured time-frequency information that is less brittle than raw waveform targets." },
+            { label: "Generative fit", text: "A richer representation may help diffusion backbones reconstruct more plausible acoustic scenes." },
+          ],
+        },
+        {
+          title: "Proposed TangoFlux-Wavelet System",
+          paragraphs: [
+            "The proposed system makes two changes to the current state-of-the-art pipeline: replace Tango2 with TangoFlux, and replace mel-spectrogram conditioning with wavelet scattering coefficients decoded through a dedicated VAE.",
+            "Part 1 trains a wavelet-conditioned VAE using raw AudioCaps audio and scattering tensors extracted with Kymatio. The best validation checkpoint is saved as wavelet_vae.pth and reused as a fixed decoder.",
+            "Part 2 trains TangoFlux to predict scattering-space representations from CLAP text embeddings and duration embeddings. The frozen VAE decoder then reconstructs waveforms from predicted scattering coefficients.",
+          ],
+          items: [
+            { label: "Backbone upgrade", text: "TangoFlux replaces Tango2 inside the AudioLDM-style framework." },
+            { label: "Representation upgrade", text: "Wavelet scattering coefficients replace mel-spectrogram targets." },
+            { label: "Training target", text: "Mean squared error is computed between reconstructed and original audio waveforms." },
+          ],
+        },
+        {
+          title: "Dataset And Evaluation",
+          paragraphs: [
+            "The DCASE development dataset contains 60 text prompts and corresponding audio embeddings. Each prompt describes a foreground sound event and an acoustic background such as water, birds, or traffic.",
+            "The original waveform recordings are not provided in the development set. Evaluation therefore compares generated audio to reference audio through embedding-space similarity rather than direct waveform matching.",
+            "FAD is the primary metric. It compares the Gaussian distributions of real and generated audio embeddings extracted with PANNs CNN14 Wavegram-Logmel.",
+          ],
+          items: [
+            { label: "Development set", text: "60 prompt and audio-embedding pairs." },
+            { label: "Embedding backbones", text: "PANNs CNN14 Wavegram-Logmel, MS-CLAP, and VGGish." },
+            { label: "Metric", text: "Frechet Audio Distance; lower is better." },
+            { label: "Caveat", text: "FAD on fewer than 100 clips can be high variance, so comparisons are most useful relative to this project's configurations." },
+          ],
+        },
+        {
+          title: "Experimental Configurations",
+          paragraphs: [
+            "The project evaluates a ladder of configurations so the impact of each architectural change can be isolated.",
+          ],
+          items: [
+            { label: "AudioLDM", text: "Official DCASE 2024 baseline." },
+            { label: "Tango2", text: "Standalone text-to-audio model conditioned on CLAP." },
+            { label: "AudioLDM/Tango2", text: "State-of-the-art combined pipeline." },
+            { label: "TangoFlux", text: "Vanilla TangoFlux architecture without AudioLDM-specific integration." },
+            { label: "AudioLDM/TangoFlux", text: "AudioLDM pipeline with TangoFlux replacing Tango2 while retaining mel-spectrogram conditioning." },
+            { label: "AudioLDM/TangoFlux-Wavelet", text: "Proposed system using wavelet scattering coefficients and a VAE decoder; conceptual under resource constraints." },
+          ],
+        },
+        {
+          title: "Results",
+          image: {
+            src: "assets/projects/sound-scene-synthesis/wavelet-vae-loss.png",
+            alt: "Training and validation loss curves for the wavelet-conditioned VAE",
+            caption: "The wavelet-conditioned VAE converges over 150 epochs, with validation loss plateauing after roughly epoch 60.",
+          },
+          paragraphs: [
+            "On the official reference scores, AudioLDM/Tango2 substantially improves over the AudioLDM baseline. On our 60-sample development set, the same trend appears, and AudioLDM/TangoFlux improves further.",
+            "AudioLDM/TangoFlux achieved the best measured dev-set FAD at 51.0765. The wavelet-conditioned VAE also showed stable convergence, but the complete TangoFlux-wavelet integration could not be fully trained within the project timeline.",
+          ],
+          table: {
+            columns: ["Configuration", "Dev FAD"],
+            rows: [
+              ["AudioLDM", "62.6838"],
+              ["Tango2", "60.8796"],
+              ["AudioLDM/Tango2", "53.5921"],
+              ["TangoFlux", "56.5396"],
+              ["AudioLDM/TangoFlux", "51.0765"],
+            ],
+          },
+        },
+        {
+          title: "Discussion",
+          paragraphs: [
+            "The results show that architectural improvements matter, but they matter most when paired with a strong generative pipeline. TangoFlux outperforms Tango2 as a standalone model and improves further when integrated with AudioLDM.",
+            "The AudioLDM framework contributes coarse-to-fine diffusion, noise-level conditioning, and iterative denoising. These pieces appear to synergize with stronger Tango-family backbones.",
+            "The partial wavelet results suggest that advanced representations can be integrated into modern text-to-audio systems, but realizing their full value requires significantly more compute than was available in the project timeline.",
+          ],
+          items: [
+            { label: "Backbone quality", text: "TangoFlux improves text-audio alignment and generation speed." },
+            { label: "Pipeline synergy", text: "AudioLDM plus a strong Tango-family model performs better than either part alone." },
+            { label: "Representation promise", text: "Wavelet scattering is promising, but the full system still needs complete training and evaluation." },
+          ],
+        },
+        {
+          title: "Limitations",
+          paragraphs: [
+            "The main limitations are practical rather than conceptual, and they are important to state clearly.",
+          ],
+          items: [
+            { label: "Incomplete TangoFlux-wavelet integration", text: "AudioCaps scale and long epoch times prevented full Part 2 training, so there are no FAD scores for the complete wavelet system." },
+            { label: "Small dev-set evaluation", text: "All project FAD comparisons use the 60-sample development set, where absolute values can be noisy." },
+            { label: "No subjective listening tests", text: "The study relies on FAD and CLAP-based metrics; human listening studies would strengthen perceptual validation." },
+          ],
+        },
+        {
+          title: "Future Work",
+          paragraphs: [
+            "The natural next step is to complete the TangoFlux-wavelet pipeline on larger compute resources and evaluate it with both objective and human-centered metrics.",
+          ],
+          items: [
+            { label: "Complete wavelet training", text: "Train the full TangoFlux-wavelet configuration long enough to report FAD and qualitative examples." },
+            { label: "Joint optimization", text: "Train the backbone and wavelet-conditioned decoder more tightly so the representation and generator co-adapt." },
+            { label: "Evaluation", text: "Use larger prompt sets, alternative embedding backbones, and structured listening tests." },
+            { label: "Prompt analysis", text: "Study multi-event prompts where TangoFlux is expected to be especially strong." },
+          ],
+        },
+        {
+          title: "My Role",
+          paragraphs: [
+            "This was a graduate machine-listening project at NYU. My work focused on implementing and comparing AudioLDM, Tango2, TangoFlux, and the proposed wavelet-conditioned direction; analyzing FAD results; and helping frame the tradeoffs between architecture, representation, and compute.",
+            "I contributed to the report-backed system design, model comparison, wavelet-VAE direction, and final analysis of how TangoFlux changes text-to-audio synthesis quality under DCASE-style evaluation.",
+          ],
+        },
+      ],
     },
     {
       slug: "fathomnet-visual-categorization",
@@ -1120,6 +1322,7 @@ function renderArticleSection(section) {
       ${section.image ? renderArticleFigure(section.image) : ""}
       ${section.paragraphs ? section.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("") : ""}
       ${section.items ? renderArticleItems(section.items) : ""}
+      ${section.table ? renderArticleTable(section.table) : ""}
     </section>
   `;
 }
@@ -1144,6 +1347,23 @@ function renderArticleItems(items) {
         )
         .join("")}
     </ul>
+  `;
+}
+
+function renderArticleTable(table) {
+  return `
+    <div class="case-table-wrap">
+      <table class="case-table">
+        <thead>
+          <tr>${table.columns.map((column) => `<th>${column}</th>`).join("")}</tr>
+        </thead>
+        <tbody>
+          ${table.rows
+            .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
+            .join("")}
+        </tbody>
+      </table>
+    </div>
   `;
 }
 

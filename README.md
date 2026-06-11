@@ -33,7 +33,7 @@ assets/       # Project visuals extracted from reports
 ## Featured Projects
 
 - IntelliQuest — Academic Paper Search Engine (React, Django, PostgreSQL, Docker)
-- Sound Scene Synthesis — Generative audio with AudioLDM / TangoFlux
+- Sound Scene Synthesis — long-form DCASE text-to-audio case study with AudioLDM / TangoFlux visuals
 - FathomNet — Underwater object detection with YOLOv8/v11
 - Harmful Brain Activity Classification — long-form EEG/spectrogram case study with report visuals
 - Wildlife Trafficking Detection — Multimodal AI with Spark, vision & language models
