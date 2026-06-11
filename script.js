@@ -378,24 +378,28 @@ const portfolio = {
       type: "Computer vision",
       course: "CS-GY 6643 Computer Vision",
       visual: "vision",
+      articleTitle: "FathomNet: Fine-Grained Visual Categorization in Underwater Imagery",
+      articleSubtitle:
+        "A research-driven computer vision study on underwater image enhancement, YOLO detection, and out-of-distribution detection under depth shift.",
       summary:
-        "Underwater object detection and out-of-distribution recognition on FathomNet2023 using YOLOv8, YOLOv11, wavelet preprocessing, and depth-aware analysis.",
+        "A multi-stage underwater vision project exploring wavelet preprocessing, YOLOv8/YOLOv11 detection, and ResNet50 + Random Forest OOD detection.",
       built:
-        "Detection and OOD pipelines with underwater-specific preprocessing, YOLO fine-tuning, and feature-extraction workflows for downstream classifiers.",
+        "Detection and OOD pipelines with underwater-specific preprocessing, YOLO fine-tuning, ResNet50 feature extraction, Random Forest classification, PCA, and K-Means analysis.",
       impact:
-        "Achieved 97.12% OOD accuracy and 91% SAUC on 5,950 underwater images, demonstrating robust detection and recognition under challenging visual conditions.",
-      context: "Built as a graduate computer vision project at NYU with a focus on robust recognition under domain shift.",
+        "Achieved 97.12% OOD accuracy and around 91% sAUC while showing that raw-data YOLOv11 was more reliable than visually enhanced inputs for fine-grained detection.",
+      context: "Built as a graduate computer vision project at NYU with a focus on robust underwater recognition under depth-driven domain shift.",
       story: [
-        "FathomNet studies underwater object detection in a setting where depth, lighting, camera conditions, and incomplete annotations create serious distribution shift.",
-        "The project compared YOLOv8 and YOLOv11 variants, underwater-specific wavelet preprocessing, and feature-extraction workflows that separate in-distribution images from deeper out-of-distribution samples.",
-        "The strongest OOD pipeline reached 97.12% accuracy and 91% SAUC on 5,950 underwater images, showing how detection, preprocessing, and explicit uncertainty handling can work together in difficult visual environments.",
+        "FathomNet studies underwater object detection in a setting where depth, lighting, turbidity, pose, blur, class imbalance, and incomplete annotations create serious distribution shift.",
+        "The work separates three connected experiments: underwater image enhancement, YOLOv8/YOLOv11 object detection, and out-of-sample detection for deeper-water imagery.",
+        "The strongest OOD pipeline reached 97.12% accuracy and around 91% sAUC on 5,950 underwater images, while detection experiments showed that preprocessing can make images look cleaner to humans but harder for detectors.",
       ],
       metrics: [
         { label: "Images", value: "5,950" },
+        { label: "Marine classes", value: "290" },
         { label: "OOD accuracy", value: "97.12%" },
-        { label: "SAUC", value: "91%" },
+        { label: "sAUC", value: "91%" },
       ],
-      stack: ["YOLOv8", "YOLOv11", "ResNet50", "Random Forest", "Wavelets", "PCA", "PyTorch"],
+      stack: ["YOLOv8", "YOLOv11", "ResNet50", "Random Forest", "Wavelets", "PCA", "K-Means", "PyTorch"],
       details: {
         problem:
           "Underwater visual recognition is vulnerable to domain shift caused by depth, lighting, camera conditions, incomplete annotations, class imbalance, and unknown organisms. The project studied whether object detection models could generalize from shallower training images to deeper validation environments.",
@@ -413,7 +417,7 @@ const portfolio = {
           "The out-of-sample pipeline achieved about 97.12% accuracy and around 91% rescaled AUC for distinguishing in-distribution versus deeper OOD images.",
         ],
         role:
-          "Owned feature extraction, network architecture, and model training according to the report's author-contribution section.",
+          "Led feature extraction and model-training work, including wavelet-based preprocessing experiments, YOLOv8/YOLOv11 detection training, and the ResNet50 + Random Forest out-of-sample detection pipeline.",
         takeaways: [
           "Depth-aware visual categorization needs both strong detectors and explicit OOD handling.",
           "YOLOv11 was the strongest practical benchmark in this study because of its accuracy, parameter efficiency, and stable learning curves.",
@@ -421,6 +425,210 @@ const portfolio = {
         ],
         sources: ["computer_vision_Final_Report__Copy_.pdf"],
       },
+      articleSections: [
+        {
+          title: "Problem Framing",
+          image: {
+            src: "assets/projects/fathomnet/sample-image.jpg",
+            alt: "Underwater FathomNet sample with marine species on the seafloor",
+            caption: "FathomNet underwater imagery combines difficult lighting, partial visibility, class imbalance, and fine-grained marine species labels.",
+          },
+          paragraphs: [
+            "Underwater computer vision is hard because the model is not only recognizing objects; it is recognizing them through depth, turbidity, lighting changes, camera variation, blur, pose shifts, occlusion, and incomplete annotations.",
+            "The FathomNet 2023 setting makes that difficulty deliberate. Training data comes from shallower water, while validation data reaches deeper environments, so the benchmark tests whether a model can generalize when the visual domain itself changes.",
+            "This project is best understood as three connected experiments: image enhancement, detector comparison, and out-of-sample detection. Together, they ask when preprocessing helps, when modern detector architecture matters, and when the system should recognize that an image is outside the familiar training distribution.",
+          ],
+        },
+        {
+          title: "Dataset And Depth Shift",
+          image: {
+            src: "assets/projects/fathomnet/category-distribution.png",
+            alt: "Cumulative distribution of FathomNet categories above and below 800 meters",
+            caption: "Training images cover 0-800m while validation images extend to 0-1300m, creating a depth-driven domain shift.",
+          },
+          paragraphs: [
+            "The project uses the FathomNet2023 dataset, a curated underwater image benchmark built from the larger FathomNet repository. It contains 5,950 images, 290 marine categories, and 20 supercategories.",
+            "The split is intentionally challenging. Training images are captured at depths between 0 and 800 meters, while validation images span 0 to 1300 meters. That means the validation set is not simply more of the same data; it probes whether the model can handle darker, deeper, and more ambiguous scenes.",
+          ],
+          items: [
+            { label: "Task", text: "Classify and localize marine organisms while handling known and unfamiliar categories." },
+            { label: "Training depth", text: "0-800 meters." },
+            { label: "Validation depth", text: "0-1300 meters." },
+            { label: "Domain shift", text: "Lighting and visibility degrade as depth increases, changing the visual distribution at inference time." },
+          ],
+        },
+        {
+          title: "Class Imbalance And Open-Set Pressure",
+          image: {
+            src: "assets/projects/fathomnet/supercategory-histogram.png",
+            alt: "Histogram of FathomNet supercategories in the training set",
+            caption: "The 290 classes roll up into 20 supercategories, with strong imbalance across the training set.",
+          },
+          paragraphs: [
+            "The dataset is highly imbalanced, which makes minority-category detection fragile. Some marine groups dominate the training data while other classes appear rarely, and the report notes that some validation classes are absent from training.",
+            "That creates a realistic open-set problem. A practical underwater vision system should not always force a confident known-class prediction; it should have a way to flag unfamiliar visual conditions or categories for human review.",
+          ],
+          items: [
+            { label: "Fine-grained labels", text: "290 marine categories create difficult species-level distinctions." },
+            { label: "Supercategories", text: "20 broader marine groupings reveal heavy class imbalance." },
+            { label: "Absent classes", text: "Some validation categories do not appear in training, adding out-of-distribution pressure." },
+          ],
+        },
+        {
+          title: "Preprocessing Survey",
+          image: {
+            src: "assets/projects/fathomnet/enhancement-comparison.jpg",
+            alt: "Comparison of underwater image enhancement methods",
+            caption: "The report compared several enhancement approaches before focusing on wavelet-based preprocessing.",
+          },
+          paragraphs: [
+            "Underwater images often suffer from reduced contrast, blur, scattering, and a blue-green color cast because red light attenuates quickly underwater. The project compared both direct enhancement methods and physically motivated color-restoration methods.",
+            "Enhancement methods such as CLAHE, gamma correction, histogram equalization, Rayleigh stretching, and wavelet enhancement directly manipulate pixel intensities. Restoration approaches such as DCP, GB-RC, IBLA, LC-DCP, MIP, NOM, RoWS, UDCP, and ULAP attempt to model underwater image formation more explicitly.",
+          ],
+          items: [
+            { label: "Enhancement", text: "Improve contrast and visibility directly from image intensities." },
+            { label: "Restoration", text: "Estimate color loss, haze, scattering, or transmission using underwater image models." },
+            { label: "Selected path", text: "Wavelet preprocessing because it improved structural visibility while reducing some blue cast." },
+          ],
+        },
+        {
+          title: "Wavelet-Based Enhancement",
+          image: {
+            src: "assets/projects/fathomnet/wavelet-results.jpg",
+            alt: "Wavelet preprocessing results on FathomNet underwater images",
+            caption: "Wavelet preprocessing reduced blue cast and improved visibility, but also changed color cues that detectors may rely on.",
+          },
+          paragraphs: [
+            "The selected preprocessing method uses a wavelet-based dual-stream strategy. A discrete wavelet transform decomposes the input into low-frequency structure and high-frequency detail bands.",
+            "The low-frequency stream handles color correction through multi-color-space fusion, while the high-frequency stream enhances edges and fine visual texture. The processed bands are then reconstructed with an inverse wavelet transform.",
+            "This produced an important research lesson: an image can become more visually appealing to humans while becoming less useful to a detector. By removing hue and changing underwater color cues, wavelet preprocessing sometimes made fine-grained object detection harder.",
+          ],
+        },
+        {
+          title: "YOLOv8 Baseline",
+          image: {
+            src: "assets/projects/fathomnet/yolov8-architecture.png",
+            alt: "YOLOv8 architecture diagram from the report",
+            caption: "YOLOv8 provides the baseline detector with backbone, neck, and head components for multiscale object detection.",
+          },
+          paragraphs: [
+            "The first detection baseline used YOLOv8m on the raw dataset. This established a reference point before testing wavelet preprocessing, different train/validation splits, and newer YOLOv11 variants.",
+            "YOLOv8 was useful because it converged quickly and gave a conventional object-detection baseline, but the report shows that its 60/40 split performance was limited by class imbalance and difficult underwater conditions.",
+            "Training YOLOv8m on wavelet-preprocessed images created a harder learning problem. Loss curves became less stable and mAP scores were lower, suggesting that the detector lost useful color or context signals when hue information was altered.",
+          ],
+        },
+        {
+          title: "YOLOv11 And Model Comparison",
+          image: {
+            src: "assets/projects/fathomnet/yolo-model-comparison.png",
+            alt: "mAP50-95 comparison across YOLOv8 and YOLOv11 model variants",
+            caption: "Raw-data YOLOv11 variants produced the strongest and most stable mAP50-95 behavior, while preprocessed variants lagged.",
+          },
+          paragraphs: [
+            "YOLOv11 was the most important detector upgrade in the project. It converged earlier, produced smoother learning curves, and achieved much stronger mAP behavior on the raw dataset.",
+            "The comparison also showed that more data helped YOLOv8: moving from a 60/40 split to an 80/20 split improved convergence and mAP50-95. But YOLOv11 reached similar or stronger behavior with fewer parameters and less dependence on extra training data.",
+          ],
+          table: {
+            columns: ["Experiment", "Input", "Main Takeaway"],
+            rows: [
+              ["YOLOv8m 60/40", "Raw", "Fast convergence, but limited by class imbalance and difficult underwater cues."],
+              ["YOLOv8m 60/40", "Wavelet", "Lower and less stable mAP; preprocessing removed cues that helped fine-grained detection."],
+              ["YOLOv8m 80/20", "Raw", "Improved convergence and stronger mAP50-95 after increasing training coverage."],
+              ["YOLOv11m 60/40", "Raw", "Most reliable practical benchmark with stable convergence and strong detection behavior."],
+              ["YOLOv11m", "Wavelet", "Still struggled on preprocessed inputs, reinforcing the color-cue tradeoff."],
+              ["YOLOv11L 80/20", "Raw", "Additional complexity did not materially improve over YOLOv11m."],
+            ],
+          },
+        },
+        {
+          title: "Inference Examples",
+          image: {
+            src: "assets/projects/fathomnet/raw-predictions.jpg",
+            alt: "Annotated YOLOv11 predictions on raw underwater images",
+            caption: "YOLOv11 on raw underwater imagery preserved more detector-friendly context than the heavily preprocessed variants.",
+          },
+          paragraphs: [
+            "The inference examples make the tradeoff tangible. Raw underwater images preserve the color, lighting, and contextual cues that the detector learned during training.",
+            "Wavelet preprocessing made some image structures cleaner, but the experiments showed that cleaner visuals are not automatically better training data. For object detection, preserving the right discriminative cues mattered more than maximizing human-perceived contrast.",
+          ],
+          items: [
+            { label: "Raw data", text: "Stronger detector behavior because the model kept access to the original underwater color and context distribution." },
+            { label: "Processed data", text: "Better visual clarity in some cases, but weaker fine-grained detection after hue and illumination cues changed." },
+            { label: "Model choice", text: "YOLOv11m became the preferred detector because it balanced accuracy, stability, and parameter efficiency." },
+          ],
+        },
+        {
+          title: "Out-Of-Sample Detection Pipeline",
+          image: {
+            src: "assets/projects/fathomnet/ood-pipeline.png",
+            alt: "ResNet50 and Random Forest out-of-sample detection pipeline",
+            caption: "A separate OOD pipeline used ResNet50 embeddings and Random Forest classification to distinguish shallower and deeper depth regimes.",
+          },
+          paragraphs: [
+            "Beyond object detection, the project treated depth shift as an out-of-sample detection problem. The goal was to distinguish in-distribution shallow-water images from deeper images whose visual conditions differ from the training regime.",
+            "A pretrained ResNet50 generated 2048-dimensional embeddings for each image after resizing to 224 x 224. Those features were then used to train a Random Forest classifier, while K-Means and PCA helped visualize whether the two depth regimes were naturally separable.",
+          ],
+          items: [
+            { label: "Feature extractor", text: "ResNet50 pretrained on ImageNet, with final classification layers removed." },
+            { label: "Classifier", text: "Random Forest over 2048-dimensional image embeddings." },
+            { label: "Labels", text: "0 for in-distribution 0-800m images and 1 for deeper 0-1300m out-of-distribution samples." },
+            { label: "Evaluation", text: "Accuracy, AUC-ROC, rescaled AUC, confusion matrix, K-Means, and PCA visualization." },
+          ],
+        },
+        {
+          title: "OOD Results",
+          image: {
+            src: "assets/projects/fathomnet/ood-clustering.png",
+            alt: "PCA clustering visualization for underwater image OOD detection",
+            caption: "PCA visualization showed strong separation between in-distribution and deeper out-of-distribution image embeddings.",
+          },
+          paragraphs: [
+            "The OOD pipeline achieved about 97.12% accuracy and around 91% sAUC, showing that depth creates a detectable feature shift in the embedding space.",
+            "This result matters because it gives the detector a safety layer. Instead of forcing a known-category prediction for every deep or unfamiliar sample, the system can flag images whose depth-driven appearance differs from the familiar training distribution.",
+          ],
+          table: {
+            columns: ["Component", "Result"],
+            rows: [
+              ["OOD accuracy", "97.12%"],
+              ["sAUC", "Around 91%"],
+              ["Embedding", "2048-dimensional ResNet50 feature vector"],
+              ["Split", "70% training / 30% testing for OOD classifier"],
+            ],
+          },
+        },
+        {
+          title: "Depth Prediction Example",
+          image: {
+            src: "assets/projects/fathomnet/ood-prediction.png",
+            alt: "Example in-distribution and out-of-distribution depth predictions",
+            caption: "The darker right-hand sample was predicted as outside the 0-800m training-depth range.",
+          },
+          paragraphs: [
+            "The prediction example shows how depth shift appears visually. The shallower sample preserves more visible green-blue seafloor structure, while the deeper sample is darker and more visually sparse.",
+            "The pipeline correctly treated the deeper sample as outside the familiar 0-800m training-depth range. This is exactly the kind of signal an underwater deployment should surface when conditions drift away from the training set.",
+          ],
+        },
+        {
+          title: "Results And Research Lessons",
+          paragraphs: [
+            "The most important takeaway is not that one model won in isolation. The project showed how sensitive underwater object detection is to preprocessing, model architecture, class imbalance, and distribution shift.",
+            "YOLOv11 on raw data emerged as the strongest practical detector, while wavelet preprocessing revealed a valuable negative result: improving image appearance for humans can reduce the discriminative cues detectors need.",
+            "The OOD pipeline added a second layer of robustness by showing that depth shift can be detected explicitly, not just absorbed silently as lower-confidence classification.",
+          ],
+          items: [
+            { label: "Preprocessing is not automatic gain", text: "Wavelet enhancement improved visibility but did not consistently improve detection." },
+            { label: "Modern detectors matter", text: "YOLOv11 was more stable and efficient than YOLOv8 under the same broad task." },
+            { label: "OOD detection is essential", text: "Depth alone created measurable distribution drift, making explicit shift detection valuable." },
+          ],
+        },
+        {
+          title: "My Role And Future Work",
+          paragraphs: [
+            "I led the feature extraction and model-training side of the project, including wavelet-based preprocessing experiments, YOLOv8/YOLOv11 detection training, and the out-of-sample detection pipeline based on ResNet50 features and Random Forest classification.",
+            "Future work should combine detector confidence, calibrated OOD scores, depth metadata, and active learning so uncertain underwater samples can be routed into a human-in-the-loop labeling process. A production-ready version would also monitor drift over new camera feeds and continuously learn from newly annotated marine samples.",
+          ],
+        },
+      ],
     },
     {
       slug: "harmful-brain-activity-classification",

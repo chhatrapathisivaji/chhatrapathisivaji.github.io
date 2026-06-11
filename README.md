@@ -34,7 +34,7 @@ assets/       # Project visuals extracted from reports
 
 - IntelliQuest — Academic Paper Search Engine (React, Django, PostgreSQL, Docker)
 - Sound Scene Synthesis — long-form DCASE text-to-audio case study with AudioLDM / TangoFlux visuals
-- FathomNet — Underwater object detection with YOLOv8/v11
+- FathomNet — long-form underwater vision case study with YOLOv8/v11, wavelet preprocessing, and OOD detection
 - Harmful Brain Activity Classification — long-form EEG/spectrogram case study with report visuals
 - Wildlife Trafficking Detection — long-form multimodal marketplace screening case study
 - NYC Job Salary Prediction — NLP + regression
