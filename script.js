@@ -4,19 +4,19 @@ const portfolio = {
       title: "LLM evaluation & agentic-system testing",
       summary:
         "Execution-based validation, adversarial suites, and guardrails for LLM-driven and agentic features.",
-      signals: ["Execution-based validation", "Adversarial suites", "Guardrails"],
+      signals: ["Execution-based validation", "Adversarial test suites", "Guardrail design"],
     },
     {
       title: "Multimodal research turned into usable product",
       summary:
         "Applied work across audio, vision, text, structured data, and cross-attention systems.",
-      signals: ["Audio", "Vision", "Text", "Structured data"],
+      signals: ["Text-to-audio (DCASE 2024)", "EEG classification (HMS)", "Wildlife ad detection", "Cross-attention fusion"],
     },
     {
       title: "Data systems wired to business outcomes",
       summary:
         "Risk analytics, retention, support automation, and experimentation built from reliable data workflows.",
-      signals: ["Risk analytics", "Retention", "Support automation", "Experimentation"],
+      signals: ["Credit risk segmentation (Tiger)", "A/B retention testing", "NLP support automation", "ETL pipeline engineering"],
     },
   ],
   experience: [
@@ -43,6 +43,7 @@ const portfolio = {
       organization: "New York University",
       place: "New York, NY",
       dates: "Oct 2023 - Nov 2023",
+      type: "Volunteer",
       expanded: true,
       paragraphs: [
         "During my first semester at NYU, I volunteered with PhD researchers at NYU's Built Environment & Informatics Lab (BILAB) on an urban infrastructure analysis project using geospatial satellite imagery of New York City. I processed and classified high-resolution satellite data using ArcGIS Pro and contributed image-classification work that fed into the lab's research on urban infrastructure patterns and environmental analysis across the city.",
@@ -56,6 +57,7 @@ const portfolio = {
       place: "Chennai, India",
       dates: "Jun 2022 - May 2023",
       type: "Full-time",
+      preview: "Risk analytics, credit forecasting, and NLP chatbot - 1M+ profiles, $4.5M mitigated.",
       paragraphs: [
         "At Tiger Analytics, I worked as a Data Analyst on risk analytics and decision-support systems for enterprise clients. I architected an end-to-end risk pipeline using hierarchical clustering over more than one million customer profiles, helping mitigate an estimated 4.5 million dollars in credit-default and compliance risk. I also built automated time-series forecasting frameworks with RNN architectures for a multi-million-dollar B2B credit portfolio, achieving over 90% prediction accuracy on key risk indicators.",
         "In parallel, I deployed an Azure-hosted chatbot powered by Tiny-RoBERTa and active-learning QnA loops that handles more than ten thousand user queries per day and increased real-time engagement by roughly sixty percent. I regularly collaborated with business stakeholders to translate model outputs into dashboards and decision rules used directly by risk and operations teams, ensuring that analytics translated into concrete changes in credit policy and workflow.",
@@ -72,6 +74,8 @@ const portfolio = {
       organization: "Tiger Analytics",
       place: "Chennai, India",
       dates: "Oct 2021 - May 2022",
+      type: "Internship",
+      preview: "PySpark ETL, forecasting, and experimentation - 500GB+ processed, 90%+ forecast accuracy.",
       paragraphs: [
         "I first joined Tiger Analytics as a Data Science Intern focused on large-scale data processing and experimentation. Using PySpark and advanced SQL, I built ETL pipelines that processed over 500 GB of industrial data and cut model-training and reporting turnaround times by about thirty percent. I ran hypothesis-driven A/B tests with Python, pandas, and SciPy to evaluate product and operations changes, which informed decisions that improved user retention by fifteen percent.",
         "I also developed Tableau dashboards and anomaly-detection models that uncovered more than five hundred thousand dollars in opportunities and reduced processing anomalies by roughly forty percent. This internship converted into a full-time Data Analyst role, based on the ownership I took over key ETL and analytics workflows throughout the engagement.",
@@ -95,8 +99,9 @@ const portfolio = {
       roleMetrics: [
         { value: "REST APIs", label: "designed and", detail: "deployed" },
         { value: "CI/CD", label: "pipeline", detail: "improved" },
-        { value: "Java · Spring · Hibernate", label: "core backend stack", detail: "" },
+        { value: "Java · Spring", label: "core backend", detail: "stack" },
       ],
+      preview: "Backend APIs, CI/CD, and Java/Spring delivery for enterprise data workflows.",
       tech: "Java, Spring Boot, Hibernate, REST APIs, CI/CD, relational databases.",
     },
   ],
@@ -180,7 +185,7 @@ const portfolio = {
       metrics: [
         { label: "Best dev FAD", value: "51.08" },
         { label: "Baseline dev FAD", value: "62.68" },
-        { label: "VAE training", value: "150 epochs" },
+        { label: "Compared", value: "6 configs" },
       ],
       stack: ["AudioLDM", "TangoFlux", "Tango2", "CLAP", "Kymatio", "VAE", "PyTorch"],
       details: {
@@ -435,10 +440,9 @@ const portfolio = {
         "Wavelet preprocessing improved human-perceived clarity but actually hurt detection performance by removing color cues the model relied on. YOLOv11 on raw images consistently outperformed all preprocessed variants. Our out-of-sample pipeline achieved 97.12% depth-shift detection accuracy and ~91% sAUC - showing that a strong visual backbone can expose distributional drift from depth alone.",
       ],
       metrics: [
-        { label: "Images", value: "5,950" },
         { label: "Marine classes", value: "290" },
         { label: "OOD accuracy", value: "97.12%" },
-        { label: "sAUC", value: "91%" },
+        { label: "sAUC", value: "~91%" },
       ],
       stack: ["YOLOv8", "YOLOv11", "ResNet50", "Random Forest", "Kymatio", "PyTorch", "OpenCV"],
       details: {
@@ -1501,7 +1505,7 @@ const portfolio = {
     },
     {
       group: "Tools And Platforms",
-      items: ["Python", "Pandas", "SciPy", "NumPy", "Git", "Docker", "Azure Bot Framework", "Tableau", "ArcGIS Pro", "Hibernate"],
+      items: ["Python", "Pandas", "SciPy", "NumPy", "Git", "Docker", "Kubernetes", "AWS", "Azure Bot Framework", "Tableau", "ArcGIS Pro", "Hibernate"],
     },
     {
       group: "Model Families",
@@ -1531,8 +1535,8 @@ const portfolio = {
     },
     {
       title: "Multimodal AI",
-      proof: "8 projects",
-      summary: "Audio, EEG, underwater vision, ad images, job text, food images, and cross-attention systems.",
+      proof: "5 modalities",
+      summary: "Audio, EEG, vision, text, and structured data across cross-attention and deep learning systems.",
     },
     {
       title: "Business Impact",
@@ -1564,15 +1568,26 @@ const portfolio = {
       ],
     },
   ],
-  certifications: [
-    "Java / J2EE Developer - Wipro",
-    "Cisco Certified Network Associate Routing and Switching - Cisco Networking Academy",
-    "Certified Software Programmer - Infosys",
-    "Certified System Administrator - ServiceNow",
-    "Introduction to Artificial Intelligence - Simplilearn",
-    "Problem Solving (Basic) - HackerRank",
-    "IBM Data Science Specialization - Coursera",
-  ],
+  certifications: {
+    featured: [
+      {
+        title: "IBM Data Science Specialization",
+        issuer: "Coursera",
+      },
+      {
+        title: "Cisco CCNA Routing and Switching",
+        issuer: "Cisco Networking Academy",
+        date: "Jul 2021",
+      },
+    ],
+    compact: [
+      "Java / J2EE Developer — Wipro · Sep 2021",
+      "Certified Software Programmer — Infosys",
+      "Certified System Administrator — ServiceNow",
+      "Introduction to AI — Simplilearn",
+      "Problem Solving (Basic) — HackerRank",
+    ],
+  },
   community: [
     {
       title: "Research Volunteer — NYU Built Environment & Informatics Lab (BILAB)",
@@ -1662,7 +1677,8 @@ function renderExperience() {
                   <span class="timeline-date">${item.dates}</span>
                   <span class="timeline-summary-main">
                     <span class="timeline-org">${item.organization} · ${item.role}</span>
-                    <span class="timeline-place">${[item.place, item.type].filter(Boolean).join(" · ")}</span>
+                    <span class="timeline-place">${[item.place, item.dates, item.type].filter(Boolean).join(" · ")}</span>
+                    ${item.preview ? `<span class="timeline-preview">${item.preview}</span>` : ""}
                   </span>
                   <span class="timeline-toggle">Show details ↓</span>
                 </summary>
@@ -1711,6 +1727,7 @@ function renderProjectVisual(kind) {
     audio: `
       <div class="project-visual audio-visual" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span><span></span>
+        <i></i><i></i><i></i><i></i><i></i>
       </div>
     `,
     vision: `
@@ -1720,7 +1737,11 @@ function renderProjectVisual(kind) {
     `,
     eeg: `
       <div class="project-visual eeg-visual" aria-hidden="true">
-        ${Array.from({ length: 18 }, (_, index) => `<span style="--level:${(index % 6) + 1}"></span>`).join("")}
+        <span class="eeg-orb"></span>
+        <span class="eeg-trace trace-a"></span>
+        <span class="eeg-trace trace-b"></span>
+        <span class="eeg-node node-a"></span>
+        <span class="eeg-node node-b"></span>
       </div>
     `,
     resnet: `
@@ -1885,9 +1906,25 @@ function renderEducation() {
 }
 
 function renderCertifications() {
-  byId("certificationList").innerHTML = portfolio.certifications
-    .map((certification) => `<li>${certification}</li>`)
-    .join("");
+  byId("certificationList").innerHTML = `
+    <li class="cert-featured-wrap">
+      <div class="cert-featured-grid">
+        ${portfolio.certifications.featured
+          .map(
+            (certification) => `
+              <article class="cert-featured">
+                <h3>${certification.title}</h3>
+                <p>${[certification.issuer, certification.date].filter(Boolean).join(" · ")}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </li>
+    ${portfolio.certifications.compact
+      .map((certification) => `<li class="cert-compact">${certification}</li>`)
+      .join("")}
+  `;
 }
 
 function renderCommunity() {
