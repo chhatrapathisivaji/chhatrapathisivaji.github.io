@@ -898,23 +898,26 @@ const portfolio = {
       type: "ML deployment",
       course: "Machine Learning Project",
       visual: "food",
+      articleTitle: "Food-11: Deploying Deep CNNs Under Resource Constraints",
+      articleSubtitle:
+        "A deployment-focused ML project comparing VGG16, MobileNet, and Xception under accuracy, CPU, memory, latency, and Kubernetes autoscaling tradeoffs.",
       summary:
-        "Image classification study comparing VGG16, MobileNet, and Xception under accuracy, memory, CPU, and response-time constraints.",
+        "Deployment-centric CNN study comparing VGG16, MobileNet, and Xception for Food-11 classification under accuracy and resource constraints.",
       built:
-        "End-to-end deployment pipeline with Kubernetes YAML, model selection, and resource-constrained benchmarking for real-world inference scenarios.",
+        "End-to-end Food-11 web-app deployment with Keras models, Docker-style serving, Kubernetes YAML, HPA configs, and resource-constrained benchmarking.",
       impact:
-        "Improved accuracy from 0.7621 to 0.8892 while keeping best-response time at 0.72 seconds within memory and CPU limits.",
+        "Improved accuracy from 0.7621 to 0.8892 while measuring the cost of that gain across CPU, memory, latency, and autoscaling behavior.",
       story: [
-        "Food-11 Classification studied the gap between benchmark accuracy and deployment practicality for image classifiers that need to run under memory, CPU, and response-time constraints.",
-        "I compared VGG16, MobileNet, and Xception pipelines, fine-tuned the stronger models, and interpreted accuracy alongside Kubernetes-style resource requirements instead of treating deployment as an afterthought.",
-        "The best model improved validation accuracy from 0.7621 to 0.8892, while the final recommendation balanced accuracy, response time, CPU, and memory tradeoffs for real-world inference.",
+        "Food-11 Classification studies the gap between benchmark accuracy and deployment practicality for image classifiers that need to run under memory, CPU, latency, and autoscaling constraints.",
+        "I compared a frozen VGG16 baseline against MobileNet and Xception, fine-tuned the stronger models, deployed them behind Kubernetes-style serving configs, and evaluated them as production inference candidates rather than offline notebooks.",
+        "Xception reached the strongest reported accuracy at 0.8892, while MobileNet offered a more cost-effective middle ground. The final recommendation weighs accuracy against CPU, memory, response time, and HorizontalPodAutoscaler behavior.",
       ],
       metrics: [
         { label: "Best accuracy", value: "0.8892" },
-        { label: "Baseline accuracy", value: "0.7621" },
-        { label: "Best response", value: "0.72 sec" },
+        { label: "MobileNet accuracy", value: "0.8756" },
+        { label: "HPA max pods", value: "5" },
       ],
-      stack: ["TensorFlow", "Keras", "VGG16", "MobileNet", "Xception", "Kubernetes YAML"],
+      stack: ["TensorFlow", "Keras", "VGG16", "MobileNet", "Xception", "Kubernetes", "Docker", "HPA"],
       details: {
         problem:
           "The baseline Food-11 classifier used VGG16 and reached 0.7621 validation accuracy, but it struggled with confusing classes such as dessert, dairy, seafood, eggs, breads, and mixed food images. The project improved the model while analyzing deployment resource costs.",
@@ -940,6 +943,168 @@ const portfolio = {
         ],
         sources: ["ML_Project_report.pdf", "ML_Presentation.pdf"],
       },
+      articleSections: [
+        {
+          title: "Problem Framing",
+          image: {
+            src: "assets/projects/food11/model-resource-dashboard.png",
+            alt: "Food-11 model accuracy, CPU, memory, and latency comparison dashboard",
+            caption: "The project evaluates model quality and serving cost together instead of optimizing accuracy alone.",
+          },
+          paragraphs: [
+            "Food-11 looks like a standard image-classification project at first: take a food image and predict one of 11 classes. The interesting part is the deployment track. The goal was not only to raise validation accuracy, but to understand what each accuracy gain costs in CPU, memory, latency, and autoscaling behavior.",
+            "That makes this a practical ML systems problem. A model that is accurate but too heavy can create cost and latency issues, while a model that is cheap but under-accurate creates poor product behavior. The project compares VGG16, MobileNet, and Xception under those tradeoffs.",
+          ],
+          items: [
+            { label: "Task", text: "Food image classification across 11 categories." },
+            { label: "Serving context", text: "A web app where users upload an image and receive the predicted class." },
+            { label: "Deployment lens", text: "Models are evaluated on accuracy, CPU, memory, response time, and Kubernetes autoscaling behavior." },
+          ],
+        },
+        {
+          title: "Dataset And Evaluation Lens",
+          paragraphs: [
+            "The dataset contains visually similar food categories such as dessert, dairy products, seafood, eggs, bread, meat, fruit, and mixed dishes. These categories create natural ambiguity because food images often contain multiple ingredients or visual cues that overlap across classes.",
+            "From the beginning, the project treated the task as a deployment decision. Validation accuracy is important, but the final recommendation also depends on how many resources each model needs to serve predictions reliably.",
+          ],
+          items: [
+            { label: "Input shape", text: "224 x 224 x 3 RGB images." },
+            { label: "Metrics", text: "Overall accuracy, CPU cores in millicores, memory usage, and average response time." },
+            { label: "Deployment data", text: "Resource usage and load-output CSVs were collected for each model deployment." },
+          ],
+        },
+        {
+          title: "Baseline: VGG16",
+          image: {
+            src: "assets/projects/food11/baseline-misclassification.jpg",
+            alt: "Food-11 web app screenshot showing VGG16 misclassifying meat as vegetable or fruit",
+            caption: "The baseline VGG16 model was fast, but it could be brittle on visually confusing food images.",
+          },
+          paragraphs: [
+            "The previous model used VGG16 with average pooling, input size 224 x 224 x 3, batch size 32, default parameters, and no additional trainable classification head. It reached 0.7621 accuracy, but struggled with dessert versus dairy products and was not confident enough on classes such as seafood, eggs, and bread.",
+            "That baseline was inexpensive to serve, using 517m CPU, 489 MB memory, and 0.45 seconds average response time with a single replica. The problem is that low resource use did not compensate for weak classification behavior.",
+          ],
+          items: [
+            { label: "Accuracy", text: "0.7621." },
+            { label: "CPU", text: "517m in the single-replica report table." },
+            { label: "Memory", text: "489 MB." },
+            { label: "Latency", text: "0.45 seconds average response time." },
+          ],
+        },
+        {
+          title: "Model A: MobileNet",
+          paragraphs: [
+            "Model A replaced VGG16 with MobileNet, an efficient CNN backbone suited to image tasks where inference cost matters. The MobileNet base used average pooling and 224 x 224 inputs, with 3,228,864 parameters frozen initially.",
+            "On top of the frozen base, I added dense ReLU layers with sizes 512, 512, 256, and 128, plus dropout at 0.5 for regularization. The model used Adam, sparse categorical cross-entropy, image scaling to the 0-1 range, and data generators with batch size 64.",
+            "Initial training reached 0.7982 validation accuracy. Fine-tuning the last five MobileNet layers with Adam learning rate 0.0001, early stopping, and checkpoints raised the reported model accuracy to 0.8756 in the summary table.",
+          ],
+          items: [
+            { label: "Accuracy", text: "0.8756 in the report summary table." },
+            { label: "CPU", text: "764m." },
+            { label: "Memory", text: "629 MB." },
+            { label: "Latency", text: "0.67 seconds average response time." },
+          ],
+        },
+        {
+          title: "Model B: Xception",
+          image: {
+            src: "assets/projects/food11/xception-correct-prediction.jpg",
+            alt: "Food-11 web app screenshot showing Xception correctly predicting meat",
+            caption: "The Xception model improved difficult qualitative cases, including red sliced meat images that confused the earlier model.",
+          },
+          paragraphs: [
+            "Model B moved to Xception, a stronger backbone for more complex image patterns. The base model used average pooling, 224 x 224 x 3 input, and 20,861,480 parameters, initially frozen before fine-tuning.",
+            "Because Xception is much heavier, the batch size was reduced to 32 and the head was kept smaller: dense layers with sizes 256, 256, and 128, ReLU activations, and dropout at 0.5. The initial 15-epoch run reached 0.8420 validation accuracy.",
+            "Fine-tuning the last five layers for 6 epochs at learning rate 0.0001 raised validation accuracy to 0.8511 at the final epoch, and the overall model comparison reported Xception as the best model at 0.8892 accuracy.",
+          ],
+          items: [
+            { label: "Accuracy", text: "0.8892." },
+            { label: "CPU", text: "1550m." },
+            { label: "Memory", text: "800 MB." },
+            { label: "Latency", text: "0.72 seconds average response time." },
+          ],
+        },
+        {
+          title: "Single-Replica Tradeoffs",
+          paragraphs: [
+            "The central result is a tradeoff curve: the most accurate model is not the cheapest model. VGG16 is fast and light but under-adapted. MobileNet improves accuracy substantially at moderate additional cost. Xception gives the highest accuracy and strongest qualitative behavior, but demands the most CPU and memory.",
+          ],
+          table: {
+            columns: ["Model", "Accuracy", "CPU", "Memory", "Latency"],
+            rows: [
+              ["VGG16", "0.7621", "517m", "489 MB", "0.45s"],
+              ["MobileNet", "0.8756", "764m", "629 MB", "0.67s"],
+              ["Xception", "0.8892", "1550m", "800 MB", "0.72s"],
+            ],
+          },
+        },
+        {
+          title: "Kubernetes Deployment Design",
+          image: {
+            src: "assets/projects/food11/kubernetes-deployment-settings.png",
+            alt: "Kubernetes HPA and resource requests and limits for Food-11 model deployments",
+            caption: "Each model received resource settings that reflected its architecture and expected serving cost.",
+          },
+          paragraphs: [
+            "The project includes Kubernetes deployment YAML for all three models. A HorizontalPodAutoscaler scales between 1 and 5 replicas with target CPU utilization of 40%. The service named ml-service-lb exposes port 6000 and forwards traffic to container port 5000 with nodePort 32000.",
+            "The resource requests and limits differ by model. VGG16 uses the smallest envelope, MobileNet raises CPU limits to support the added Keras computation, and Xception raises memory requests because its base model has far more parameters.",
+          ],
+          table: {
+            columns: ["Model", "CPU request", "CPU limit", "Memory request", "Memory limit"],
+            rows: [
+              ["VGG16", "1", "2", "2Gi", "4Gi"],
+              ["MobileNet", "1", "3", "2Gi", "5Gi"],
+              ["Xception", "1", "3", "3Gi", "5Gi"],
+            ],
+          },
+        },
+        {
+          title: "Autoscaling Behavior",
+          paragraphs: [
+            "The deployment analysis also compared average memory usage, average transition rate, and average response time under Horizontal Dynamic Scaling. The same broad pattern held: more complex models require more memory and compute, but dynamic scaling helps avoid keeping excess replicas alive during lighter traffic.",
+            "This is where the project becomes more than a model-comparison notebook. It connects architecture choice to serving behavior, pod transitions, and capacity planning.",
+          ],
+          items: [
+            { label: "Memory trend", text: "Higher-accuracy models used more memory in both single-replica and autoscaled settings." },
+            { label: "Transition rate", text: "Lower transition rate did not automatically mean higher accuracy, but heavier accurate models tended to show more stable load patterns." },
+            { label: "Response time", text: "More complex models took longer to compute, but the difference between MobileNet and Xception remained manageable in the reported setup." },
+          ],
+        },
+        {
+          title: "Model Behavior And Error Analysis",
+          paragraphs: [
+            "The baseline VGG16 model had difficulty distinguishing dessert, dairy products, seafood, eggs, and bread. It also lacked fine-tuning and a deeper head, so it was not well adapted to the Food-11 domain.",
+            "MobileNet overcame many baseline issues and reached a large accuracy gain, but still struggled in rare cases such as sliced red meat being confused with fruit or mixed dishes like chicken-rice where a single label must represent a multi-ingredient image.",
+            "Xception handled the observed failure modes best and produced the strongest qualitative behavior. The tradeoff is cost: it is the most expensive model in CPU, memory, and latency.",
+          ],
+        },
+        {
+          title: "Deployment Recommendations",
+          paragraphs: [
+            "The final recommendation depends on the operating constraint. If maximum decision quality matters and resources are available, Xception is the best candidate. If the system needs a cost-effective balance of accuracy and serving efficiency, MobileNet is the stronger practical compromise.",
+            "The VGG16 baseline is useful as a low-cost reference point, but its accuracy and error profile make it insufficient for a production-grade image-classification app without fine-tuning and a better classification head.",
+          ],
+          items: [
+            { label: "Maximum accuracy", text: "Deploy Xception with careful resource limits and autoscaling." },
+            { label: "Cost-effective serving", text: "Use MobileNet when infrastructure efficiency matters more than the final accuracy gain." },
+            { label: "Avoid frozen baselines", text: "A frozen VGG16 feature extractor was fast, but not accurate enough for the target application." },
+          ],
+        },
+        {
+          title: "My Role",
+          paragraphs: [
+            "I designed and trained the three CNN variants used in the project: the VGG16 baseline, MobileNet, and Xception. I also performed fine-tuning experiments, added callbacks such as early stopping, model checkpoints, and learning-rate reduction, and analyzed qualitative failure modes across food categories.",
+            "On the deployment side, I authored Kubernetes YAML for the model deployments and autoscaling setup, collected resource_usage and load_output CSVs, and analyzed the tradeoffs among CPU, memory, latency, transition rate, and model accuracy. The final project recommendation was based on accuracy and cost together, not accuracy alone.",
+          ],
+        },
+        {
+          title: "Limitations And Future Work",
+          paragraphs: [
+            "The project establishes a strong deployment-oriented comparison, but a production version would benefit from broader validation across more diverse food images, calibrated confidence thresholds, and a clearer strategy for multi-label or mixed-dish cases.",
+            "Future work could add model compression, quantization, TensorFlow Lite or ONNX serving, request batching, GPU-backed inference comparisons, and monitoring for drift in uploaded food images.",
+          ],
+        },
+      ],
     },
     {
       slug: "nyc-salary-range-prediction",

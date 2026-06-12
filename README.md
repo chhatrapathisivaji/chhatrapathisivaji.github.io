@@ -39,7 +39,7 @@ assets/       # Project visuals extracted from reports
 - Wildlife Trafficking Detection — long-form multimodal marketplace screening case study
 - NYC Job Salary Prediction — NLP + regression
 - Parameter-Efficient ResNet for CIFAR-10
-- Food-11 Classification & Deployment
+- Food-11 Classification & Deployment — long-form CNN deployment case study with Kubernetes resource trade-offs
 - Full-Stack Library Management System — Java, Spring MVC, MySQL, RBAC
 
 ## Contact
