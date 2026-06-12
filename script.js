@@ -1548,23 +1548,36 @@ const portfolio = {
     {
       school: "New York University",
       dates: "Aug 2023 - May 2025",
-      details:
-        "MS in Computer Science, New York, NY.",
+      degree: "MS in Computer Science",
+      location: "New York, NY",
       highlights: [
-        "<strong>Coursework:</strong> Machine Learning, Deep Learning, Big Data, Computer Vision, Information Visualization, Cognitive Computational Modelling, Machine Listening, Design & Analysis of Algorithms, Software Engineering, Foundation of Data Science (Capstone).",
-        "<strong>Graduate Projects:</strong> Sound Scene Synthesis (DCASE 2024), Harmful Brain Activity Classification, FathomNet Fine-Grained Visual Categorization, Wildlife Trafficking Detection, Food-11 Deployment, NYC Salary Range Prediction, and IntelliQuest Academic Search Engine.",
+        "<strong>Activities:</strong> New York Machine Learning Club.",
+      ],
+      detailGroups: [
+        {
+          title: "Coursework",
+          body: "Machine Learning, Deep Learning, Big Data, Computer Vision, Information Visualization, Cognitive Computational Modelling, Machine Listening, Design & Analysis of Algorithms, Software Engineering, Foundation of Data Science (Capstone).",
+        },
+        {
+          title: "Graduate Projects",
+          body: "Sound Scene Synthesis (DCASE 2024), Harmful Brain Activity Classification, FathomNet Fine-Grained Visual Categorization, Wildlife Trafficking Detection, Food-11 Deployment, NYC Salary Range Prediction, and IntelliQuest Academic Search Engine.",
+        },
       ],
     },
     {
       school: "KL University",
       dates: "Jun 2018 - Apr 2022",
-      details:
-        "Bachelor of Science in Computer Science and Engineering with Artificial Intelligence, Vijayawada, India.",
-      coursework:
-        "Relevant coursework: Data Structures, Algorithms, Machine Learning, Artificial Intelligence, Database Systems, Operating Systems.",
+      degree: "BSc in Computer Science & Engineering with AI",
+      location: "Vijayawada, India",
       highlights: [
         "<strong>Honors:</strong> Selected as one of the top competitive coders at KL University — Competitive Coding Club (2018-2022).",
         "<strong>Activities:</strong> AI/ML Club · Competitive Coding Club.",
+      ],
+      detailGroups: [
+        {
+          title: "Relevant Coursework",
+          body: "Data Structures, Algorithms, Machine Learning, Artificial Intelligence, Database Systems, Operating Systems.",
+        },
       ],
     },
   ],
@@ -1594,6 +1607,12 @@ const portfolio = {
       meta: "Oct 2023 - Nov 2023 · New York University · New York, NY",
       summary:
         "Collaborated with PhD researchers on urban infrastructure analysis using geospatial satellite imagery of New York City. Processed and classified high-resolution ArcGIS Pro data, contributing image-classification work to the lab's ongoing research on city-level environmental patterns.",
+    },
+    {
+      title: "Member — New York Machine Learning Club",
+      meta: "2023 - 2025 · New York University · New York, NY",
+      summary:
+        "Participated in the New York Machine Learning Club during the NYU MS CS program, engaging with the local ML research and practitioner community through talks, workshops, and peer discussions on applied machine learning topics.",
     },
     {
       title: "Top Competitive Coder — KL University Competitive Coding Club",
@@ -1889,16 +1908,38 @@ function renderEducation() {
   byId("educationList").innerHTML = portfolio.education
     .map(
       (item) => `
-        <article class="education-item">
-          <span class="education-date">${item.dates}</span>
-          <h3>${item.school}</h3>
-          <p>${item.details}</p>
-          ${item.coursework ? `<p class="coursework">${item.coursework}</p>` : ""}
-          ${
-            item.highlights
-              ? `<ul class="education-highlights">${item.highlights.map((highlight) => `<li>${highlight}</li>`).join("")}</ul>`
-              : ""
-          }
+        <article class="edu-card">
+          <div class="edu-header">
+            <div class="edu-left">
+              <span class="edu-date">${item.dates}</span>
+              <h3 class="edu-school">${item.school}</h3>
+            </div>
+            <div class="edu-right">
+              <span class="edu-degree">${item.degree}</span>
+              <span class="edu-location">${item.location}</span>
+            </div>
+          </div>
+          <div class="edu-body">
+            ${
+              item.highlights
+                ? item.highlights.map((highlight) => `<p class="edu-activities">${highlight}</p>`).join("")
+                : ""
+            }
+            ${
+              item.detailGroups
+                ? item.detailGroups
+                    .map(
+                      (group) => `
+                        <details class="edu-details">
+                          <summary>${group.title}</summary>
+                          <p>${group.body}</p>
+                        </details>
+                      `
+                    )
+                    .join("")
+                : ""
+            }
+          </div>
         </article>
       `
     )
@@ -1939,6 +1980,20 @@ function renderCommunity() {
       `
     )
     .join("");
+}
+
+function bindEmailReveal() {
+  document.querySelectorAll(".email-reveal-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const address = `${button.dataset.user}@${button.dataset.domain}`;
+      const link = document.createElement("a");
+
+      link.href = `mailto:${address}`;
+      link.className = "contact-link";
+      link.textContent = address;
+      button.replaceWith(link);
+    });
+  });
 }
 
 function renderProjectDetail(slug) {
@@ -2122,6 +2177,7 @@ renderSkills();
 renderEducation();
 renderCertifications();
 renderCommunity();
+bindEmailReveal();
 handleRoute();
 
 const navBurger = document.querySelector(".nav-burger");

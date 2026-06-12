@@ -413,7 +413,6 @@ button {
 .skills-sub,
 .contact-sub,
 .positioning-intro,
-.education-item p,
 .community-card p {
   max-width: 740px;
   margin-left: auto;
@@ -449,8 +448,7 @@ button {
 .skills-sub,
 .positioning-intro,
 .timeline-tech,
-.project-tech-line,
-.coursework {
+.project-tech-line {
   color: var(--light-gray);
   font-size: 16px;
   line-height: 1.7;
@@ -1476,48 +1474,93 @@ button {
   margin-bottom: 64px;
 }
 
-.education-item {
-  border-left: 3px solid var(--cyan);
-  padding-left: 32px;
+.edu-card {
+  border-left: 2px solid var(--cyan);
+  margin-bottom: 3rem;
+  padding: 2rem 0 2rem 2rem;
 }
 
-.education-date {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--light-gray);
-  margin-bottom: 8px;
+.edu-header {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
-.education-item h3 {
-  font-size: 24px;
-  margin-bottom: 12px;
+.edu-left,
+.edu-right,
+.edu-body {
+  display: flex;
+  flex-direction: column;
 }
 
-.education-item p {
-  color: var(--light-gray);
-  line-height: 1.6;
+.edu-left,
+.edu-right {
+  gap: 0.25rem;
 }
 
-.education-highlights {
-  display: grid;
-  gap: 10px;
-  list-style: none;
-  margin: 16px 0;
+.edu-right {
+  align-items: flex-end;
 }
 
-.education-highlights li {
-  color: var(--light-gray);
-  font-size: 15px;
-  line-height: 1.65;
-  padding-left: 20px;
-  position: relative;
-}
-
-.education-highlights li::before {
+.edu-date {
   color: var(--cyan);
-  content: "▸";
-  left: 0;
-  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.edu-school {
+  color: var(--white);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.edu-degree {
+  color: var(--cyan);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.edu-location {
+  color: var(--light-gray);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.edu-body {
+  gap: 0.75rem;
+}
+
+.edu-activities {
+  color: var(--light-gray);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.edu-details summary {
+  color: var(--light-gray);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0;
+  text-transform: uppercase;
+}
+
+.edu-details summary:hover {
+  color: var(--cyan);
+}
+
+.edu-details p {
+  color: var(--light-gray);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin-top: 0.5rem;
 }
 
 .certs-title {
@@ -1574,7 +1617,7 @@ button {
 .community-grid {
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .community-card {
@@ -1685,6 +1728,35 @@ button {
   border-bottom: 1px solid currentColor;
 }
 
+.email-reveal-btn {
+  background: none;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  text-transform: uppercase;
+}
+
+.email-reveal-btn:hover,
+.email-reveal-btn:focus {
+  background: var(--cyan);
+  color: var(--black);
+}
+
+.section-accent .email-reveal-btn {
+  border-color: var(--black);
+  color: var(--black);
+}
+
+.section-accent .email-reveal-btn:hover,
+.section-accent .email-reveal-btn:focus {
+  background: var(--black);
+  color: var(--cyan);
+}
+
 /* ===== FOOTER ===== */
 .footer {
   padding: 40px var(--gutter);
@@ -1731,5 +1803,12 @@ button {
   .community-grid,
   .cert-featured-grid {
     grid-template-columns: 1fr;
+  }
+  .edu-right {
+    align-items: flex-start;
+  }
+  .edu-degree,
+  .edu-location {
+    text-align: left;
   }
 }
