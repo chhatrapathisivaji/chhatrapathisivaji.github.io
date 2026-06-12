@@ -31,6 +31,11 @@ const portfolio = {
         "At Handshake AI, I work as an AI Research Fellow on evaluation and reliability for LLM-driven products. I lead the development of execution-based validation pipelines for LLM-generated code, which has raised test pass rates from roughly 60% to over 87% and reduced invalid downstream code in production features. I also co-design latency-optimized inference paths - combining smarter batching, caching, and routing - that have cut end-to-end request latency from about 1.8 seconds to 1.1 seconds while preserving output quality.",
         "A large part of my role involves turning qualitative feedback into measurable evaluation criteria and guardrails. I partner with PMs and engineers to translate user pain points into concrete metrics, run experiments and ablation studies on prompts and routing policies, and build adversarial and edge-case test suites for agentic systems. This work has roughly doubled the distinct failure modes covered by our tests and improved robustness on unseen scenarios by around 20%.",
       ],
+      roleMetrics: [
+        { value: "87%+", label: "LLM test pass rate", detail: "was 60%" },
+        { value: "39%", label: "latency reduced", detail: "1.8s to 1.1s" },
+        { value: "2x", label: "failure mode coverage", detail: "doubled" },
+      ],
       tech: "Python, PyTorch, internal evaluation frameworks, cloud services.",
     },
     {
@@ -55,6 +60,11 @@ const portfolio = {
         "At Tiger Analytics, I worked as a Data Analyst on risk analytics and decision-support systems for enterprise clients. I architected an end-to-end risk pipeline using hierarchical clustering over more than one million customer profiles, helping mitigate an estimated 4.5 million dollars in credit-default and compliance risk. I also built automated time-series forecasting frameworks with RNN architectures for a multi-million-dollar B2B credit portfolio, achieving over 90% prediction accuracy on key risk indicators.",
         "In parallel, I deployed an Azure-hosted chatbot powered by Tiny-RoBERTa and active-learning QnA loops that handles more than ten thousand user queries per day and increased real-time engagement by roughly sixty percent. I regularly collaborated with business stakeholders to translate model outputs into dashboards and decision rules used directly by risk and operations teams, ensuring that analytics translated into concrete changes in credit policy and workflow.",
       ],
+      roleMetrics: [
+        { value: "1M+", label: "customer profiles", detail: "segmented" },
+        { value: "$4.5M", label: "risk mitigated", detail: "credit and compliance" },
+        { value: "10K+", label: "daily queries", detail: "chatbot handled" },
+      ],
       tech: "Python, scikit-learn, RNNs, Azure Bot Framework, Tiny-RoBERTa, SQL, Tableau.",
     },
     {
@@ -66,6 +76,11 @@ const portfolio = {
         "I first joined Tiger Analytics as a Data Science Intern focused on large-scale data processing and experimentation. Using PySpark and advanced SQL, I built ETL pipelines that processed over 500 GB of industrial data and cut model-training and reporting turnaround times by about thirty percent. I ran hypothesis-driven A/B tests with Python, pandas, and SciPy to evaluate product and operations changes, which informed decisions that improved user retention by fifteen percent.",
         "I also developed Tableau dashboards and anomaly-detection models that uncovered more than five hundred thousand dollars in opportunities and reduced processing anomalies by roughly forty percent. This internship converted into a full-time Data Analyst role, based on the ownership I took over key ETL and analytics workflows throughout the engagement.",
       ],
+      roleMetrics: [
+        { value: "500GB+", label: "data processed", detail: "via PySpark ETL" },
+        { value: "90%+", label: "forecast accuracy", detail: "B2B credit portfolio" },
+        { value: "$500K+", label: "opportunities", detail: "surfaced" },
+      ],
       tech: "PySpark, SQL, Python, SciPy, Tableau, SparkSQL, Hadoop.",
     },
     {
@@ -76,6 +91,11 @@ const portfolio = {
       paragraphs: [
         "Earlier in my career, I worked as a Full Stack Java Trainee at EPAM Systems, building enterprise back-end systems that supported internal data workflows and cross-team integrations. I designed and deployed production REST APIs and microservices using Java, Spring, and Hibernate, and I implemented data ingestion and transformation services that provided reliable, well-structured inputs for downstream analytics consumers.",
         "To improve reliability, I strengthened the codebase with unit and integration tests and contributed to CI/CD improvements that reduced post-release incidents and shortened deployment cycles. This early engineering experience gave me a strong foundation in production software practices that I now apply directly to ML evaluation and data pipeline work.",
+      ],
+      roleMetrics: [
+        { value: "REST APIs", label: "designed and", detail: "deployed" },
+        { value: "CI/CD", label: "pipeline", detail: "improved" },
+        { value: "Java · Spring · Hibernate", label: "core backend stack", detail: "" },
       ],
       tech: "Java, Spring Boot, Hibernate, REST APIs, CI/CD, relational databases.",
     },
@@ -1511,7 +1531,7 @@ const portfolio = {
     },
     {
       title: "Multimodal AI",
-      proof: "9 projects",
+      proof: "8 projects",
       summary: "Audio, EEG, underwater vision, ad images, job text, food images, and cross-attention systems.",
     },
     {
@@ -1528,7 +1548,7 @@ const portfolio = {
         "MS in Computer Science, New York, NY.",
       highlights: [
         "<strong>Coursework:</strong> Machine Learning, Deep Learning, Big Data, Computer Vision, Information Visualization, Cognitive Computational Modelling, Machine Listening, Design & Analysis of Algorithms, Software Engineering, Foundation of Data Science (Capstone).",
-        "<strong>Graduate Projects:</strong> Sound Scene Synthesis (DCASE 2024), Harmful Brain Activity Classification, FathomNet Fine-Grained Visual Categorization, Wildlife Trafficking Detection, Food-11 Deployment, and NYC Salary Range Prediction.",
+        "<strong>Graduate Projects:</strong> Sound Scene Synthesis (DCASE 2024), Harmful Brain Activity Classification, FathomNet Fine-Grained Visual Categorization, Wildlife Trafficking Detection, Food-11 Deployment, NYC Salary Range Prediction, and IntelliQuest Academic Search Engine.",
       ],
     },
     {
@@ -1538,6 +1558,10 @@ const portfolio = {
         "Bachelor of Science in Computer Science and Engineering with Artificial Intelligence, Vijayawada, India.",
       coursework:
         "Relevant coursework: Data Structures, Algorithms, Machine Learning, Artificial Intelligence, Database Systems, Operating Systems.",
+      highlights: [
+        "<strong>Honors:</strong> Selected as one of the top competitive coders at KL University — Competitive Coding Club (2018-2022).",
+        "<strong>Activities:</strong> AI/ML Club · Competitive Coding Club.",
+      ],
     },
   ],
   certifications: [
@@ -1551,19 +1575,22 @@ const portfolio = {
   ],
   community: [
     {
-      title: "Research Collaboration",
+      title: "Research Volunteer — NYU Built Environment & Informatics Lab (BILAB)",
+      meta: "Oct 2023 - Nov 2023 · New York University · New York, NY",
       summary:
-        "Volunteered with NYU Built Environment & Informatics Lab researchers on geospatial satellite imagery analysis, connecting computer vision with urban infrastructure and environmental research.",
+        "Collaborated with PhD researchers on urban infrastructure analysis using geospatial satellite imagery of New York City. Processed and classified high-resolution ArcGIS Pro data, contributing image-classification work to the lab's ongoing research on city-level environmental patterns.",
     },
     {
-      title: "Graduate Team Leadership",
+      title: "Top Competitive Coder — KL University Competitive Coding Club",
+      meta: "2018 - 2022 · KL University · Vijayawada, India",
       summary:
-        "Helped organize multi-person NYU projects around reproducible experiments, clear model comparisons, and report-backed technical narratives across audio, EEG, vision, and MLOps work.",
+        "Selected as one of the top coders at KL University across university-wide competitive programming challenges and AI/ML initiatives. Participated in coding contests and collaborated on algorithmic problem-solving within the department's CS community.",
     },
     {
-      title: "Technical Communication",
+      title: "AI/ML Club Member — KL University",
+      meta: "2018 - 2022 · KL University · Vijayawada, India",
       summary:
-        "Turned complex model behavior into readable reports, presentations, case studies, and deployment recommendations that make tradeoffs visible to both technical and non-technical audiences.",
+        "Participated in AI/ML Club activities while completing a CSE degree with Artificial Intelligence, strengthening the technical foundation behind later NYU graduate work in machine learning, deep learning, computer vision, big data, and applied AI systems.",
     },
   ],
   footer: {
@@ -1600,6 +1627,7 @@ const moreProjectSlugs = [
   "food11-ml-deployment",
   "nyc-salary-range-prediction",
   "intelliquest",
+  "resnet-cifar10-under-5m",
 ];
 
 function renderGoals() {
@@ -1654,7 +1682,26 @@ function renderExperienceContent(item, includeDate = true) {
       <div class="timeline-prose">
         ${(item.paragraphs || item.details || []).map((paragraph) => `<p>${paragraph}</p>`).join("")}
       </div>
+      ${item.roleMetrics ? renderRoleMetrics(item.roleMetrics) : ""}
       ${item.tech ? `<p class="timeline-tech"><strong>Tech:</strong> ${item.tech}</p>` : ""}
+    </div>
+  `;
+}
+
+function renderRoleMetrics(metrics) {
+  return `
+    <div class="role-metrics">
+      ${metrics
+        .map(
+          (metric) => `
+            <span class="role-metric-item">
+              <span class="metric-value">${metric.value}</span>
+              <span class="metric-label">${metric.label}</span>
+              ${metric.detail ? `<span class="metric-detail">${metric.detail}</span>` : ""}
+            </span>
+          `
+        )
+        .join("")}
     </div>
   `;
 }
@@ -1761,6 +1808,7 @@ function renderProjectCard(project, variant = "featured") {
 function setProjectsExpanded(expanded) {
   const moreProjects = byId("moreProjects");
   const button = byId("viewAllProjects");
+  const featuredLabel = byId("featuredProjectsLabel");
 
   if (!moreProjects || !button) {
     return;
@@ -1768,6 +1816,9 @@ function setProjectsExpanded(expanded) {
 
   moreProjects.hidden = !expanded;
   button.hidden = expanded;
+  if (featuredLabel) {
+    featuredLabel.hidden = !expanded;
+  }
 }
 
 function bindProjectReveal() {
@@ -1821,12 +1872,12 @@ function renderEducation() {
           <span class="education-date">${item.dates}</span>
           <h3>${item.school}</h3>
           <p>${item.details}</p>
+          ${item.coursework ? `<p class="coursework">${item.coursework}</p>` : ""}
           ${
             item.highlights
               ? `<ul class="education-highlights">${item.highlights.map((highlight) => `<li>${highlight}</li>`).join("")}</ul>`
               : ""
           }
-          ${item.coursework ? `<p class="coursework">${item.coursework}</p>` : ""}
         </article>
       `
     )
@@ -1845,6 +1896,7 @@ function renderCommunity() {
       (item) => `
         <article class="community-card">
           <h3>${item.title}</h3>
+          ${item.meta ? `<p class="community-meta">${item.meta}</p>` : ""}
           <p>${item.summary}</p>
         </article>
       `
