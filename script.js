@@ -1996,46 +1996,6 @@ function bindEmailReveal() {
   });
 }
 
-function bindContactForm() {
-  const form = byId("contactForm");
-  const status = byId("formStatus");
-
-  if (!form) {
-    return;
-  }
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (typeof form.reportValidity === "function" && !form.reportValidity()) {
-      return;
-    }
-
-    const data = new FormData(form);
-    const name = String(data.get("name") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    const company = String(data.get("company") || "").trim();
-    const message = String(data.get("message") || "").trim();
-    const recipient = `${form.dataset.user}@${form.dataset.domain}`;
-    const subject = `Portfolio inquiry from ${name || "a visitor"}`;
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      company ? `Company / Organization: ${company}` : "",
-      "",
-      message,
-    ]
-      .filter((line, index) => line || index === 3)
-      .join("\n");
-
-    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    if (status) {
-      status.textContent = "Your email app should open with the message prefilled. If it does not, use the reveal email button below.";
-    }
-  });
-}
-
 function renderProjectDetail(slug) {
   const project = portfolio.projects.find((item) => item.slug === slug);
   const detail = byId("projectDetail");
@@ -2218,7 +2178,6 @@ renderEducation();
 renderCertifications();
 renderCommunity();
 bindEmailReveal();
-bindContactForm();
 handleRoute();
 
 const navBurger = document.querySelector(".nav-burger");

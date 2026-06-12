@@ -1719,14 +1719,6 @@ button {
   outline: none;
 }
 
-.form-status {
-  color: rgba(10,10,10,0.74);
-  font-size: 13px;
-  line-height: 1.6;
-  margin-top: 14px;
-  min-height: 1.6em;
-}
-
 .contact-alt {
   font-family: var(--font-mono);
   font-size: 13px;
