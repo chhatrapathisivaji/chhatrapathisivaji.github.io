@@ -152,9 +152,9 @@ const portfolio = {
           "Hands-on experience with Docker containerization and cloud deployment on Digital Ocean.",
           "Practical integration of GPT-based personalization into a production search system.",
         ],
-        sources: ["https://github.com/ShaktidharK1997/IntelliQuest"],
+        sources: ["/IntelliQuest"],
       },
-      links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/IntelliQuest" }],
+      links: [{ label: "GitHub", href: "/IntelliQuest" }],
     },
     {
       slug: "sound-scene-synthesis",
@@ -707,7 +707,7 @@ const portfolio = {
         { label: "Classes", value: "6" },
       ],
       stack: ["PyTorch", "EfficientNetB0", "EEGNet", "GRU", "TensorFlow MirroredStrategy"],
-      links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/DLFinalProject" }],
+      links: [{ label: "GitHub", href: "/DLFinalProject" }],
       details: {
         problem:
           "Critically ill patients often require EEG monitoring to detect seizures and other harmful brain activity. Manual EEG interpretation depends on specialized neurologists and can be slow, expensive, and vulnerable to fatigue-related errors. The project explored whether deep learning models can assist by classifying clinically relevant EEG patterns automatically.",
@@ -913,7 +913,7 @@ const portfolio = {
         { label: "Params", value: "4.70M" },
       ],
       stack: ["PyTorch", "ResNet", "CIFAR-10", "SE blocks", "BatchNorm", "Dropout"],
-      links: [{ label: "GitHub", href: "https://github.com/ShaktidharK1997/DLProject" }],
+      links: [{ label: "GitHub", href: "/DLProject" }],
       details: {
         problem:
           "The project goal was to design a CIFAR-10 image classifier that balances accuracy, depth, and computational efficiency under a strict 5 million trainable-parameter limit.",
